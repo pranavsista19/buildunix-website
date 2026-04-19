@@ -1,0 +1,41 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0F0D0B"/>
+  <rect width="1200" height="630" fill="url(#paint0_radial)"/>
+  <rect x="38" y="38" width="1124" height="554" rx="32" fill="#1C1714" stroke="#3D2E26"/>
+  <text x="84" y="118" fill="#F5A060" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="4.2">CONSTRUCTION EXECUTION PLATFORM · INDIA</text>
+  <text x="84" y="236" fill="#F0EDE8" font-family="Inter, Arial, sans-serif" font-size="84" font-weight="800">Construction runs on</text>
+  <text x="84" y="330" fill="#F5A060" font-family="Inter, Arial, sans-serif" font-size="84" font-weight="800">BuildUnix changes that.</text>
+  <text x="84" y="396" fill="#EDE4D8" font-family="Inter, Arial, sans-serif" font-size="28">
+    <tspan x="84" dy="0">Phase-enforced construction execution for Indian PMC firms.</tspan>
+    <tspan x="84" dy="40">Mandatory photo proof. Live heatmaps. AI daily reports.</tspan>
+  </text>
+  <g opacity="0.95">
+    <rect x="826" y="114" width="280" height="280" rx="28" fill="#2E2420" stroke="#3D2E26"/>
+    <rect x="858" y="146" width="46" height="46" rx="12" fill="#6B7E95"/>
+    <rect x="916" y="146" width="46" height="46" rx="12" fill="#F0A020"/>
+    <rect x="974" y="146" width="46" height="46" rx="12" fill="#3D85E8"/>
+    <rect x="1032" y="146" width="46" height="46" rx="12" fill="#0DAF72"/>
+    <rect x="858" y="204" width="46" height="46" rx="12" fill="#6B7E95"/>
+    <rect x="916" y="204" width="46" height="46" rx="12" fill="#3D85E8"/>
+    <rect x="974" y="204" width="46" height="46" rx="12" fill="#E53535"/>
+    <rect x="1032" y="204" width="46" height="46" rx="12" fill="#0DAF72"/>
+    <rect x="858" y="262" width="46" height="46" rx="12" fill="#F0A020"/>
+    <rect x="916" y="262" width="46" height="46" rx="12" fill="#0DAF72"/>
+    <rect x="974" y="262" width="46" height="46" rx="12" fill="#0DAF72"/>
+    <rect x="1032" y="262" width="46" height="46" rx="12" fill="#3D85E8"/>
+    <rect x="858" y="320" width="46" height="46" rx="12" fill="#6B7E95"/>
+    <rect x="916" y="320" width="46" height="46" rx="12" fill="#0DAF72"/>
+    <rect x="974" y="320" width="46" height="46" rx="12" fill="#0DAF72"/>
+    <rect x="1032" y="320" width="46" height="46" rx="12" fill="#0DAF72"/>
+  </g>
+  <rect x="826" y="430" width="280" height="94" rx="22" fill="#3D2E26"/>
+  <text x="856" y="468" fill="#F5A060" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">PMC approved</text>
+  <text x="856" y="504" fill="#F0EDE8" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">Slab Layout · Floor 3</text>
+  <text x="84" y="548" fill="#A8987E" font-family="Inter, Arial, sans-serif" font-size="22">Digitizing Construction Execution</text>
+  <defs>
+    <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(310 112) rotate(36.5) scale(694.717 404.569)">
+      <stop stop-color="#E8690A" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#0F0D0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

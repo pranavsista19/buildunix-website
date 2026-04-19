@@ -1,0 +1,253 @@
+.hero {
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+  overflow: clip;
+  padding: clamp(5rem, 8vw, 8rem) 0 clamp(4.5rem, 7vw, 7rem);
+  background:
+    radial-gradient(circle at 82% 16%, rgb(var(--ember-light-rgb) / 0.16), transparent 24rem),
+    linear-gradient(180deg, var(--color-charcoal), var(--color-deep-char));
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 35%;
+  background: linear-gradient(180deg, transparent, rgb(var(--warm-white-rgb) / 0.08));
+  pointer-events: none;
+}
+
+.heroGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.heroCopy {
+  max-width: 42rem;
+}
+
+.heroTitle {
+  max-width: 12ch;
+  margin: 0;
+  color: var(--color-dark-text);
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(3rem, 6.3vw, 5.7rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.heroBody {
+  max-width: 42rem;
+  margin: 1.35rem 0 0;
+  color: var(--color-ember-light);
+  font-size: clamp(1.08rem, 1.6vw, 1.35rem);
+  line-height: 1.75;
+}
+
+.heroShowcase {
+  width: min(100%, 42rem);
+  justify-self: end;
+}
+
+.heroSignal {
+  padding: clamp(1.35rem, 3vw, 1.8rem);
+  border: 1px solid rgb(var(--stone-border-rgb) / 0.18);
+  border-radius: var(--radius-xl);
+  background: rgb(var(--warm-white-rgb) / 0.07);
+  box-shadow: var(--shadow-dark);
+}
+
+.heroSignal span,
+.formKicker {
+  color: var(--color-ember-light);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroSignal strong {
+  display: block;
+  margin-top: 0.9rem;
+  color: var(--color-dark-text);
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.heroSignal p {
+  margin: 0.9rem 0 0;
+  color: var(--color-dark-secondary);
+  line-height: 1.8;
+}
+
+.contentSection {
+  margin-top: 0;
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(circle at 12% 8%, rgb(var(--ember-orange-rgb) / 0.1), transparent 22rem),
+    var(--color-warm-white);
+}
+
+.grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.formShell,
+.sidebarSticky {
+  border: 1px solid rgb(var(--stone-border-rgb) / 0.58);
+  border-radius: var(--radius-2xl);
+  background:
+    linear-gradient(180deg, rgb(var(--warm-white-rgb) / 0.82), rgb(var(--warm-off-white-rgb) / 0.74)),
+    var(--color-warm-off-white);
+  box-shadow: var(--shadow-card);
+}
+
+.formShell {
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.formKicker {
+  color: var(--color-ember-orange);
+}
+
+.formTitle,
+.sidebarTitle {
+  margin: 0.55rem 0 0;
+  color: var(--color-charcoal);
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.06;
+  overflow: visible;
+}
+
+.formTitle {
+  max-width: 14ch;
+}
+
+.formBody {
+  max-width: 42rem;
+  margin: 1rem 0 1.6rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.sidebarSticky {
+  position: sticky;
+  top: calc(var(--header-height) + 1.25rem);
+  padding: 1.25rem;
+}
+
+.reasonList {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.35rem;
+}
+
+.reasonCard {
+  position: relative;
+  padding: 1.1rem 1.1rem 1.1rem 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgb(var(--stone-border-rgb) / 0.38);
+  border-radius: 1.25rem;
+  background: rgb(var(--warm-white-rgb) / 0.64);
+}
+
+.reasonCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--color-ember-orange);
+}
+
+.reasonCard > span {
+  color: var(--color-ember-orange);
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.reasonCard h3 {
+  margin: 0.45rem 0 0.45rem;
+  color: var(--color-charcoal);
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+.reasonCard p {
+  margin: 0;
+  color: var(--color-charcoal);
+  line-height: 1.7;
+}
+
+.emailCard {
+  margin-top: 1rem;
+  padding: 1.1rem;
+  border: 1px solid rgb(var(--stone-border-rgb) / 0.34);
+  border-radius: 1.25rem;
+  background: rgb(var(--warm-white-rgb) / 0.66);
+  color: var(--color-warm-black);
+}
+
+.emailCard p {
+  margin: 0;
+  line-height: 1.75;
+}
+
+.emailCard p + p {
+  margin-top: 0.35rem;
+}
+
+.emailCard a {
+  color: var(--color-deep-ember);
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+@media (max-width: 991px) {
+  .heroGrid,
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroShowcase {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .sidebarSticky {
+    position: static;
+  }
+
+  .hero {
+    padding-bottom: clamp(4rem, 7vw, 6rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .heroTitle {
+    font-size: clamp(2.55rem, 11vw, 3.75rem);
+  }
+}

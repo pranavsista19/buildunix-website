@@ -1,0 +1,98 @@
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgb(var(--deep-char-rgb) / 0.2), rgb(var(--deep-char-rgb) / 0.72)),
+    radial-gradient(circle at center, rgb(var(--ember-orange-rgb) / 0.18), transparent 45%),
+    var(--color-deep-char);
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  filter: saturate(0.92) brightness(0.82);
+}
+
+.poster,
+.structureGlow,
+.structureGrid,
+.texture,
+.scrim {
+  position: absolute;
+  inset: 0;
+}
+
+.poster {
+  z-index: 0;
+  background-image:
+    linear-gradient(180deg, rgb(var(--deep-char-rgb) / 0.04), rgb(var(--deep-char-rgb) / 0.18)),
+    url("/media/hero/buildunix-hero-poster.png"),
+    radial-gradient(circle at 76% 18%, rgb(var(--ember-orange-rgb) / 0.2), transparent 22%),
+    radial-gradient(circle at 24% 60%, rgb(var(--stone-border-rgb) / 0.08), transparent 28%),
+    linear-gradient(120deg, rgb(var(--deep-char-rgb) / 0.9), rgb(var(--charcoal-rgb) / 0.62));
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.85) brightness(0.72);
+  transform: scale(1.03);
+}
+
+.structureGlow {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 20% 35%, rgb(var(--ember-orange-rgb) / 0.14), transparent 18%),
+    radial-gradient(circle at 72% 58%, rgb(var(--stone-border-rgb) / 0.08), transparent 26%);
+}
+
+.structureGrid {
+  z-index: 1;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgb(var(--stone-border-rgb) / 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--stone-border-rgb) / 0.06) 1px, transparent 1px);
+  background-size: min(8vw, 5rem) min(8vw, 5rem);
+  mask-image: linear-gradient(180deg, transparent 0%, black 22%, black 100%);
+}
+
+.texture {
+  z-index: 3;
+  background-image:
+    linear-gradient(135deg, rgb(var(--stone-border-rgb) / 0.03) 25%, transparent 25%),
+    linear-gradient(225deg, rgb(var(--stone-border-rgb) / 0.03) 25%, transparent 25%);
+  background-size: 18px 18px;
+  mix-blend-mode: soft-light;
+  opacity: 0.16;
+}
+
+.scrim {
+  z-index: 4;
+  background:
+    linear-gradient(
+      180deg,
+      rgb(var(--deep-char-rgb) / 0.15) 0%,
+      rgb(var(--deep-char-rgb) / 0.45) 52%,
+      rgb(var(--deep-char-rgb) / 0.85) 100%
+    );
+}
+
+@media (max-width: 767px) {
+  .structureGrid {
+    background-size: 2.6rem 2.6rem;
+    opacity: 0.18;
+  }
+
+  .scrim {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(var(--deep-char-rgb) / 0.32) 0%,
+        rgb(var(--deep-char-rgb) / 0.58) 42%,
+        rgb(var(--deep-char-rgb) / 0.78) 100%
+      );
+  }
+}

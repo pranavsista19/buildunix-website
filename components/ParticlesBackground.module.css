@@ -1,0 +1,105 @@
+.particleField {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: clip;
+  isolation: isolate;
+}
+
+.particle {
+  position: absolute;
+  top: var(--particle-top);
+  left: var(--particle-left);
+  width: var(--particle-size);
+  height: var(--particle-size);
+  border-radius: 44% 56% 58% 42% / 41% 47% 53% 59%;
+  opacity: var(--particle-opacity);
+  background:
+    radial-gradient(circle at 28% 26%, rgb(var(--warm-white-rgb) / 0.82), transparent 22%),
+    radial-gradient(circle at 38% 36%, color-mix(in srgb, var(--particle-color) 68%, transparent), transparent 48%),
+    radial-gradient(circle at 68% 64%, color-mix(in srgb, var(--particle-color) 48%, transparent), transparent 70%);
+  box-shadow:
+    0 0 2.2rem color-mix(in srgb, var(--particle-color) 22%, transparent),
+    0 0 5rem color-mix(in srgb, var(--particle-color) 12%, transparent);
+  filter: blur(1.2rem);
+  transform: translate3d(0, 0, 0);
+  mix-blend-mode: multiply;
+  animation:
+    particleDrift var(--particle-duration) ease-in-out infinite alternate,
+    particleMorph calc(var(--particle-duration) * 1.45) ease-in-out infinite alternate;
+  animation-delay: var(--particle-delay);
+}
+
+.particle:nth-child(3n) {
+  animation-name: particleDriftWide;
+}
+
+.particle:nth-child(4n) {
+  animation-name: particleDriftTall, particleMorph;
+}
+
+.particle:nth-child(5n) {
+  mix-blend-mode: screen;
+}
+
+@keyframes particleDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.94) rotate(0deg);
+  }
+
+  100% {
+    transform: translate3d(2.8rem, -3.8rem, 0) scale(1.08) rotate(12deg);
+  }
+}
+
+@keyframes particleDriftWide {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.92) rotate(0deg);
+  }
+
+  100% {
+    transform: translate3d(-4.2rem, 2.4rem, 0) scale(1.06) rotate(-10deg);
+  }
+}
+
+@keyframes particleDriftTall {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.96) rotate(0deg);
+  }
+
+  100% {
+    transform: translate3d(1.6rem, -5.4rem, 0) scale(1.1) rotate(8deg);
+  }
+}
+
+@keyframes particleMorph {
+  0% {
+    border-radius: 44% 56% 58% 42% / 41% 47% 53% 59%;
+  }
+
+  50% {
+    border-radius: 57% 43% 39% 61% / 54% 38% 62% 46%;
+  }
+
+  100% {
+    border-radius: 48% 52% 63% 37% / 36% 59% 41% 64%;
+  }
+}
+
+@media (max-width: 767px) {
+  .particle {
+    animation-duration: calc(var(--particle-duration) * 1.4);
+    filter: blur(1.6rem);
+  }
+
+  .particle:nth-child(n + 7) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    animation: none;
+  }
+}

@@ -1,0 +1,72 @@
+.line {
+  display: block;
+  min-height: 1.08em;
+  margin-top: 0.15em;
+  line-height: 1;
+  white-space: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.initial {
+  color: var(--color-ember-light);
+  font-style: italic;
+}
+
+.final {
+  color: var(--color-dark-text);
+}
+
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.word + .word {
+  margin-left: 0.18em;
+}
+
+.character {
+  display: inline-block;
+}
+
+.unixCharacter {
+  color: var(--color-ember);
+  text-shadow: 0 1px 6px rgb(0 0 0 / 0.35);
+}
+
+.outgoing .character {
+  transition:
+    transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--char-index) * 20ms);
+  transform: translateY(-0.75em) rotateX(65deg);
+  opacity: 0;
+}
+
+@media (max-width: 767px) {
+  .line {
+    font-size: 0.9em;
+    white-space: normal;
+  }
+
+  .word + .word {
+    margin-left: 0.16em;
+  }
+}
+
+.incoming .character {
+  animation: charIn 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation-delay: calc(var(--char-index) * 20ms);
+}
+
+@keyframes charIn {
+  0% {
+    transform: translateY(0.7em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

@@ -1,0 +1,79 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgb(var(--stone-border-rgb) / 0.24);
+  background: var(--color-warm-off-white);
+}
+
+.frame[data-variant="dark"] {
+  background: linear-gradient(180deg, rgb(var(--charcoal-rgb) / 0.92), rgb(var(--deep-char-rgb) / 0.98));
+}
+
+.placeholder,
+.image {
+  position: absolute;
+  inset: 0;
+}
+
+.placeholder {
+  display: grid;
+  align-content: end;
+  gap: 0.55rem;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at top right, rgb(var(--ember-orange-rgb) / 0.16), transparent 28%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.12), transparent 55%),
+    var(--color-warm-off-white);
+}
+
+.frame[data-variant="dark"] .placeholder {
+  background:
+    radial-gradient(circle at top right, rgb(var(--ember-orange-rgb) / 0.18), transparent 24%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.08), transparent 50%),
+    linear-gradient(180deg, rgb(var(--charcoal-rgb) / 0.92), rgb(var(--deep-char-rgb) / 0.98));
+}
+
+.placeholderEyebrow {
+  color: var(--color-ember-orange);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.placeholderTitle {
+  color: var(--color-charcoal);
+  font-family: var(--font-heading), sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 0.95;
+}
+
+.placeholderDescription {
+  max-width: 22rem;
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.frame[data-variant="dark"] .placeholderTitle {
+  color: var(--color-dark-text);
+}
+
+.frame[data-variant="dark"] .placeholderDescription {
+  color: rgb(240 237 232 / 0.72);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.imageLoaded {
+  opacity: 1;
+}

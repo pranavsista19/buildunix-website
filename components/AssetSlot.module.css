@@ -1,0 +1,50 @@
+.slot {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 0.875rem;
+  padding: 1.5rem;
+  border: 1px dashed rgb(var(--stone-border-rgb) / 0.9);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgb(var(--ember-orange-rgb) / 0.04), transparent),
+    var(--color-warm-off-white);
+  color: var(--color-warm-black);
+}
+
+.slotDark {
+  background:
+    linear-gradient(180deg, rgb(var(--ember-orange-rgb) / 0.12), transparent),
+    rgb(var(--charcoal-rgb) / 0.82);
+  border-color: rgb(var(--stone-border-rgb) / 0.22);
+  color: var(--color-dark-text);
+}
+
+.eyebrow {
+  color: var(--color-ember-orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.slotDark .eyebrow {
+  color: var(--color-ember-light);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-heading), sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.05;
+}
+
+.description {
+  margin: 0;
+  max-width: 28rem;
+  color: inherit;
+  line-height: 1.75;
+  opacity: 0.85;
+}
