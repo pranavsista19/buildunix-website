@@ -12,6 +12,7 @@ const headingFont = Space_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  preload: true,
   variable: "--font-heading"
 });
 
@@ -19,6 +20,7 @@ const bodyFont = Manrope({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  preload: true,
   variable: "--font-body"
 });
 
@@ -26,6 +28,7 @@ const monoFont = DM_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
+  preload: true,
   variable: "--font-mono"
 });
 
@@ -77,12 +80,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/brand/buildunix-icon.png" type="image/png" />
-        <link rel="shortcut icon" href="/brand/buildunix-icon.png" type="image/png" />
         <link
           rel="preload"
-          href="/media/hero/buildunix-hero-poster.png"
+          href="/media/hero/buildunix-hero-poster.webp"
           as="image"
+          type="image/webp"
           fetchPriority="high"
         />
       </head>
