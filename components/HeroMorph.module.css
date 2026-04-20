@@ -9,12 +9,12 @@
 }
 
 .initial {
-  color: var(--color-ember-light);
+  color: #fff;
   font-style: italic;
 }
 
 .final {
-  color: var(--color-dark-text);
+  color: #fff;
 }
 
 .word {
