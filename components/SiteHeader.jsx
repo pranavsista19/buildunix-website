@@ -70,7 +70,7 @@ export default function SiteHeader() {
         <div className={styles.brandCluster}>
           <Link className={styles.logoLink} href="/" aria-label="BuildUNIX home">
             <img
-              src="/brand/buildunix-logo.png"
+              src="/brand/buildunix-logo.svg"
               alt="BuildUNIX"
               className={styles.logo}
               width="392"

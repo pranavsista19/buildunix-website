@@ -11,7 +11,7 @@ export default function SiteFooter() {
         <div className={styles.grid}>
           <div className={styles.brandColumn}>
             <img
-              src="/brand/buildunix-logo.png"
+              src="/brand/buildunix-logo.svg"
               alt="BuildUNIX"
               className={styles.logo}
               width="392"

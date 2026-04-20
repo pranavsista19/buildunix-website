@@ -5,9 +5,8 @@
   padding: 0.6rem 0;
   border-bottom: 1px solid rgb(var(--stone-border-rgb) / 0.08);
   background:
-    linear-gradient(180deg, rgb(var(--charcoal-rgb) / 0.92), rgb(var(--deep-char-rgb) / 0.86)),
-    var(--color-charcoal);
-  box-shadow: 0 22px 58px rgb(var(--deep-char-rgb) / 0.18);
+    radial-gradient(circle at 16% 12%, rgb(var(--ember-light-rgb) / 0.12), transparent 22rem),
+    linear-gradient(180deg, var(--color-charcoal), var(--color-deep-char));
   backdrop-filter: blur(22px);
 }
 
@@ -55,11 +54,11 @@
 }
 
 .logo {
-  width: clamp(10.2rem, 11.8vw, 12.4rem);
+  width: clamp(13rem, 16vw, 17rem);
   object-fit: contain;
   height: auto;
-  border-radius: 0.3rem;
-  filter: drop-shadow(0 10px 24px rgb(var(--deep-char-rgb) / 0.18));
+  border-radius: 0.4rem;
+  filter: drop-shadow(0 12px 28px rgb(var(--deep-char-rgb) / 0.14));
 }
 
 .brandTagline {
