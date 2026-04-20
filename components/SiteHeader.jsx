@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import BrandText from "@/components/BrandText";
 import styles from "@/components/SiteHeader.module.css";
-import { navLinks } from "@/lib/site-content";
+import { navLinks, siteMetadata } from "@/lib/site-content";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -36,6 +36,7 @@ export default function SiteHeader() {
               height="150"
             />
           </Link>
+          <span className={styles.brandTagline}>{siteMetadata.tagline}</span>
         </div>
 
         <div className={styles.navShell}>

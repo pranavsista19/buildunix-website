@@ -33,19 +33,24 @@ export const metadata = {
   metadataBase: new URL(siteUrl),
   title: siteMetadata.homeTitle,
   description: siteMetadata.homeDescription,
+  icons: {
+    icon: "/brand/buildunix-icon.png",
+    shortcut: "/brand/buildunix-icon.png",
+    apple: "/brand/buildunix-icon.png"
+  },
   alternates: {
     canonical: "/"
   },
   openGraph: {
     title: siteMetadata.homeOgTitle,
-    description: siteMetadata.homeDescription,
+    description: siteMetadata.homeOgDescription,
     url: "/",
     siteName: siteMetadata.name,
     type: "website",
     locale: "en_IN",
     images: [
       {
-        url: "/og/buildunix-og.svg",
+        url: `${siteUrl}/og/buildunix-og.svg`,
         width: 1200,
         height: 630,
         alt: siteMetadata.homeOgTitle
@@ -69,6 +74,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="icon" href="/brand/buildunix-icon.png" type="image/png" />
+        <link rel="shortcut icon" href="/brand/buildunix-icon.png" type="image/png" />
         <link
           rel="preload"
           href="/media/hero/buildunix-hero-poster.png"

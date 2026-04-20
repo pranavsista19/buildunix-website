@@ -36,6 +36,7 @@
 .brandCluster {
   display: inline-flex;
   align-items: center;
+  gap: 0.8rem;
   flex: 0 0 auto;
   min-width: 0;
 }
@@ -59,6 +60,15 @@
   height: auto;
   border-radius: 0.3rem;
   filter: drop-shadow(0 10px 24px rgb(var(--deep-char-rgb) / 0.18));
+}
+
+.brandTagline {
+  color: rgb(var(--warm-white-rgb) / 0.6);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .navShell {
@@ -248,6 +258,10 @@
 
   .logo {
     width: 9.8rem;
+  }
+
+  .brandTagline {
+    display: none;
   }
 
   .menuButton {
