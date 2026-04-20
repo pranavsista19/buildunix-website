@@ -6,10 +6,11 @@
   white-space: normal;
   overflow-wrap: normal;
   word-break: normal;
+  text-shadow: 0px 2px 16px rgba(0, 0, 0, 0.75);
 }
 
 .initial {
-  color: #fff;
+  color: var(--color-ember-orange);
   font-style: italic;
 }
 

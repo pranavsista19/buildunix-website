@@ -172,7 +172,7 @@
 .menuButton span {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 2.5px;
   margin: 0.23rem 0;
   border-radius: 999px;
   background: var(--color-warm-white);
@@ -186,12 +186,16 @@
   inset: 0;
   z-index: 95;
   width: 100vw;
+  min-height: 100dvh;
+  height: 100dvh;
   display: grid;
   grid-template-rows: 1fr auto;
   gap: 2rem;
   padding: 6.75rem 2.5rem 2rem;
   border-left: 0;
-  background: rgb(var(--charcoal-rgb) / 0.92);
+  background: var(--color-charcoal);
+  opacity: 1;
+  overflow-y: auto;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -298,5 +302,19 @@
   .menuButton {
     width: 2.65rem;
     height: 2.65rem;
+  }
+
+  .mobilePanel {
+    padding: calc(var(--header-height) + 2rem) 2rem 2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobilePanel {
+    padding: calc(var(--header-height) + 1.75rem) 1.5rem 1.5rem;
+  }
+
+  .mobileNav {
+    gap: 1.75rem;
   }
 }
