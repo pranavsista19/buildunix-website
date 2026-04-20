@@ -2,6 +2,7 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
+  pointer-events: none;
   background:
     linear-gradient(180deg, rgb(var(--deep-char-rgb) / 0.2), rgb(var(--deep-char-rgb) / 0.72)),
     radial-gradient(circle at center, rgb(var(--ember-orange-rgb) / 0.18), transparent 45%),
@@ -16,7 +17,7 @@
   height: 100%;
   object-fit: cover;
   opacity: 1;
-  filter: saturate(0.92) brightness(0.82);
+  filter: saturate(0.88) brightness(0.72);
 }
 
 .poster,
@@ -38,7 +39,7 @@
     linear-gradient(120deg, rgb(var(--deep-char-rgb) / 0.9), rgb(var(--charcoal-rgb) / 0.62));
   background-size: cover;
   background-position: center;
-  filter: saturate(0.85) brightness(0.72);
+  filter: saturate(0.82) brightness(0.64);
   transform: scale(1.03);
 }
 
@@ -74,13 +75,19 @@
   background:
     linear-gradient(
       180deg,
-      rgb(var(--deep-char-rgb) / 0.15) 0%,
-      rgb(var(--deep-char-rgb) / 0.45) 52%,
-      rgb(var(--deep-char-rgb) / 0.85) 100%
+      rgb(var(--deep-char-rgb) / 0.24) 0%,
+      rgb(var(--deep-char-rgb) / 0.58) 48%,
+      rgb(var(--deep-char-rgb) / 0.9) 100%
     );
 }
 
 @media (max-width: 767px) {
+  .structureGlow,
+  .structureGrid,
+  .texture {
+    display: none;
+  }
+
   .structureGrid {
     background-size: 2.6rem 2.6rem;
     opacity: 0.18;
@@ -90,9 +97,9 @@
     background:
       linear-gradient(
         180deg,
-        rgb(var(--deep-char-rgb) / 0.32) 0%,
-        rgb(var(--deep-char-rgb) / 0.58) 42%,
-        rgb(var(--deep-char-rgb) / 0.78) 100%
+        rgb(var(--deep-char-rgb) / 0.42) 0%,
+        rgb(var(--deep-char-rgb) / 0.72) 40%,
+        rgb(var(--deep-char-rgb) / 0.88) 100%
       );
   }
 }

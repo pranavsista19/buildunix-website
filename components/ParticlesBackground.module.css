@@ -88,6 +88,10 @@
 }
 
 @media (max-width: 767px) {
+  .particleField {
+    display: none;
+  }
+
   .particle {
     animation-duration: calc(var(--particle-duration) * 1.4);
     filter: blur(1.6rem);

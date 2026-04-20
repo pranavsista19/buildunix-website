@@ -64,6 +64,9 @@ export const metadata = {
 };
 
 export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#FAF6F1" },
     { media: "(prefers-color-scheme: dark)", color: "#0F0D0B" }
@@ -81,12 +84,6 @@ export default function RootLayout({ children }) {
           href="/media/hero/buildunix-hero-poster.png"
           as="image"
           fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          href="/media/hero/buildunix-hero.mp4"
-          as="video"
-          type="video/mp4"
         />
       </head>
       <body

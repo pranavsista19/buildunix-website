@@ -6,6 +6,7 @@ import styles from "@/components/HeroMedia.module.css";
 export default function HeroMedia() {
   const videoRef = useRef(null);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [videoFailed, setVideoFailed] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,16 @@ export default function HeroMedia() {
   }, []);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const syncMobile = () => setIsMobile(mediaQuery.matches);
+
+    syncMobile();
+    mediaQuery.addEventListener("change", syncMobile);
+
+    return () => mediaQuery.removeEventListener("change", syncMobile);
+  }, []);
+
+  useEffect(() => {
     const video = videoRef.current;
 
     if (!video || reducedMotion || videoFailed) {
@@ -28,7 +39,7 @@ export default function HeroMedia() {
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
-    video.preload = "auto";
+    video.preload = isMobile ? "metadata" : "auto";
     video.load();
 
     const startPlayback = () => {
@@ -46,7 +57,7 @@ export default function HeroMedia() {
     return () => {
       video.removeEventListener("canplay", startPlayback);
     };
-  }, [reducedMotion, videoFailed]);
+  }, [isMobile, reducedMotion, videoFailed]);
 
   return (
     <div className={styles.media} data-hero-media>
@@ -58,7 +69,7 @@ export default function HeroMedia() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload={isMobile ? "metadata" : "auto"}
           poster="/media/hero/buildunix-hero-poster.png"
           onError={() => {
             setVideoFailed(true);
