@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import BrandText from "@/components/BrandText";
 import styles from "@/components/SiteHeader.module.css";
@@ -9,6 +9,7 @@ import { navLinks, siteMetadata } from "@/lib/site-content";
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -22,6 +23,46 @@ export default function SiteHeader() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+  const handleMobileNavClick = (event, href) => {
+    const isHashLink = href.startsWith("/#");
+
+    if (isHashLink && pathname === "/") {
+      event.preventDefault();
+      closeMenu();
+
+      const targetId = href.replace("/#", "");
+
+      window.setTimeout(() => {
+        const target = document.getElementById(targetId);
+        const header = document.querySelector("header");
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+        if (!target) {
+          window.location.hash = targetId;
+          return;
+        }
+
+        const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+        window.history.replaceState(null, "", href);
+        window.scrollTo({ top, behavior: "smooth" });
+      }, 220);
+
+      return;
+    }
+
+    closeMenu();
+
+    if (isHashLink && pathname !== "/") {
+      event.preventDefault();
+      router.push(href);
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -73,15 +114,31 @@ export default function SiteHeader() {
         id="mobile-navigation"
         className={`${styles.mobilePanel} ${menuOpen ? styles.mobilePanelOpen : ""}`}
       >
+        <div className={styles.mobilePanelHeader}>
+          <span className={styles.mobilePanelLabel}>Menu</span>
+          <button
+            type="button"
+            className={styles.mobileBackButton}
+            aria-label="Close navigation menu"
+            onClick={closeMenu}
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+        </div>
         <nav className={styles.mobileNav} aria-label="Mobile">
           {navLinks.map((item) => (
-            <Link key={item.label} href={item.href} className={styles.mobileLink}>
+            <Link
+              key={item.label}
+              href={item.href}
+              className={styles.mobileLink}
+              onClick={(event) => handleMobileNavClick(event, item.href)}
+            >
               <BrandText text={item.label} />
             </Link>
           ))}
         </nav>
         <div className={styles.mobileCtas}>
-          <Link href="/contact" className="button buttonPrimary">
+          <Link href="/contact" className="button buttonPrimary" onClick={closeMenu}>
             Book a Demo
           </Link>
         </div>
