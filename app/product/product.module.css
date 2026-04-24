@@ -969,139 +969,38 @@
   margin-bottom: clamp(2.5rem, 4vw, 4rem);
 }
 
-.rolesLayout {
+.rolesGrid {
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: clamp(2rem, 4vw, 4rem);
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
-.rolesTabs {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.roleCard {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
   background: var(--surface);
-  position: sticky;
-  top: calc(var(--header-height) + 2rem);
+  padding: 1.75rem;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.roleTab {
-  padding: 0.9rem 1.1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s;
-}
-.roleTab:last-child { border-bottom: none; }
-.roleTab:hover { background: var(--elevated); color: var(--text-2); }
-
-.roleTabActive {
-  background: var(--elevated);
-  color: var(--text);
-  font-weight: 600;
-  border-left: 2px solid var(--accent-on-bg);
-}
-
-.rolePanel {
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-xl);
-  background: var(--surface);
-  padding: 2rem;
+.roleCard:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-soft);
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  border-color: var(--border-strong);
 }
 
-.rolePanelHead {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.rolePanelTitle {
+.roleTitle {
   font-family: var(--ff-display);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
-  letter-spacing: -0.025em;
   color: var(--text);
+  margin-bottom: 0.75rem;
 }
 
-.rolePanelDevice {
-  font-family: var(--ff-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  white-space: nowrap;
-  border: 1px solid var(--border-strong);
-  border-radius: 999px;
-  padding: 4px 10px;
-}
-
-.rolePanelSummary {
-  font-size: 14px;
+.roleSummary {
+  font-size: 13px;
   color: var(--text-2);
   line-height: 1.6;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.rolePanelActionsLabel {
-  font-family: var(--ff-mono);
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 0.6rem;
-}
-
-.roleActionList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  list-style: none;
-}
-
-.roleActionItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  font-size: 13px;
-  color: var(--text-2);
-  line-height: 1.5;
-}
-
-.roleActionMark {
-  color: var(--color-success);
-  font-size: 11px;
-  margin-top: 2px;
-  flex-shrink: 0;
-}
-
-.roleCannot {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  font-size: 12px;
-  color: var(--text-muted);
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  border: 1px solid color-mix(in oklab, var(--color-danger) 20%, transparent);
-  background: color-mix(in oklab, var(--color-danger) 5%, transparent);
-}
-
-.roleCannotMark {
-  color: var(--color-danger);
-  font-size: 11px;
-  flex-shrink: 0;
-  margin-top: 1px;
 }
 
 /* ── CTA ────────────────────────────────────────────── */

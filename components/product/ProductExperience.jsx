@@ -185,9 +185,6 @@ function HeroSection() {
               <Link href="/contact" className="button buttonPrimary">
                 Book a Demo <span className="buttonArrow">→</span>
               </Link>
-              <Link href="/pricing" className="button buttonGhost">
-                See pricing
-              </Link>
             </div>
           </Reveal>
         </div>
@@ -444,8 +441,6 @@ function FeaturesSection() {
 
 /* ── Roles ──────────────────────────────────────────── */
 function RolesSection() {
-  const [active, setActive] = useState("pmc");
-  const role = roles.find((r) => r.id === active);
 
   return (
     <section className={`section ${styles.rolesSection}`}>
@@ -455,30 +450,13 @@ function RolesSection() {
           <h2 className="sectionTitle">Every stakeholder gets the <em>right view</em>.</h2>
           <p className="sectionBody">Seven distinct roles, each with exactly the visibility and permissions their job requires — and nothing more.</p>
         </Reveal>
-        <div className={styles.rolesLayout}>
-          <div className={styles.rolesTabs}>
-            {roles.map((r) => (
-              <button key={r.id} className={`${styles.roleTab} ${r.id === active ? styles.roleTabActive : ""}`} onClick={() => setActive(r.id)}>
-                {r.label}
-              </button>
-            ))}
-          </div>
-          <Reveal key={active} className={styles.rolePanel} y={16}>
-            <div className={styles.rolePanelHead}>
-              <h3 className={styles.rolePanelTitle}>{role.title}</h3>
-              <span className={styles.rolePanelDevice}>{role.device === "mobile" ? "📱 Mobile" : "🖥 Desktop"}</span>
-            </div>
-            <p className={styles.rolePanelSummary}>{role.summary}</p>
-            <div className={styles.rolePanelActions}>
-              <div className={styles.rolePanelActionsLabel}>CAN</div>
-              <ul className={styles.roleActionList}>
-                {role.actions.map((a) => (
-                  <li key={a} className={styles.roleActionItem}><span className={styles.roleActionMark}>✓</span>{a}</li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.roleCannot}><span className={styles.roleCannotMark}>✕</span>{role.cannot}</div>
-          </Reveal>
+        <div className={styles.rolesGrid}>
+          {roles.map((r, i) => (
+            <Reveal key={r.id} className={styles.roleCard} delay={i * 0.05} y={16}>
+              <h3 className={styles.roleTitle}>{r.title}</h3>
+              <p className={styles.roleSummary}>{r.summary}</p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -596,7 +574,6 @@ function CtaSection() {
           </p>
           <div className={styles.ctaActions}>
             <Link href="/contact" className="button buttonPrimary">Book a Demo <span className="buttonArrow">→</span></Link>
-            <Link href="/pricing" className="button buttonGhost">See pricing</Link>
           </div>
         </Reveal>
       </div>

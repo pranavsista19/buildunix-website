@@ -211,6 +211,78 @@
   height: 36px;
   background: linear-gradient(to bottom, var(--text-muted), transparent);
   animation: scrollDown 2s ease-in-out infinite;
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+/* ── Interactive Demo ───────────────────────────────── */
+.interactiveDemoSection {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg-grad-1);
+}
+
+.interactiveDemoLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+.interactiveDemoPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.interactiveDemoTag {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-on-bg);
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 12px;
+  width: max-content;
+  margin-bottom: 0.5rem;
+}
+
+.interactiveDemoTitle {
+  font-family: var(--ff-display);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.interactiveDemoBody {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.interactiveDemoHint {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.interactiveDemoCanvas {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  position: relative;
+  height: 500px;
 }
 
 /* ── Highlights ─────────────────────────────────────── */

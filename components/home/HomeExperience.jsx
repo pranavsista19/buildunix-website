@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "@/app/home.module.css";
 import { companyEmail } from "@/lib/site-content";
 import DemoForm from "@/components/DemoForm";
+import BuildunixCommunitySection from "@/components/buildunix-community/index";
 
 /* ── Typewriter ─────────────────────────────────────── */
 function Typewriter({ words, typeMs = 75, eraseMs = 40, holdMs = 1400 }) {
@@ -113,6 +114,7 @@ function HeroSection() {
   );
 }
 
+
 /* ── Highlights ─────────────────────────────────────── */
 function HighlightsSection() {
   const cardRef = useRef(null);
@@ -196,9 +198,6 @@ function HighlightsSection() {
           </Link>
           <Link href="/contact" className={styles.intentChip}>
             <span className={styles.intentK}>→</span> Improve profits
-          </Link>
-          <Link href="/pricing" className={styles.intentChip}>
-            <span className={styles.intentK}>→</span> See pricing
           </Link>
         </div>
       </div>
@@ -332,9 +331,6 @@ function FinalCTA() {
         <Link href="/contact" className="button buttonPrimary" onMouseMove={onBtnMove}>
           Book a pilot →
         </Link>
-        <Link href="/pricing" className="button buttonGhost" onMouseMove={onBtnMove}>
-          See pricing
-        </Link>
         <Link href="/product" className="button buttonGhost" onMouseMove={onBtnMove}>
           See the product
         </Link>
@@ -348,6 +344,7 @@ export default function HomeExperience() {
   return (
     <>
       <HeroSection />
+      <BuildunixCommunitySection />
       <HighlightsSection />
       <DifferentiatorsSection />
       <ContactSection />
