@@ -1,6 +1,4 @@
 import Link from "next/link";
-import BrandText from "@/components/BrandText";
-import BrandWordmark from "@/components/BrandWordmark";
 import styles from "@/components/SiteFooter.module.css";
 import { footerColumns, siteMetadata } from "@/lib/site-content";
 
@@ -10,15 +8,15 @@ export default function SiteFooter() {
       <div className="containerWide">
         <div className={styles.grid}>
           <div className={styles.brandColumn}>
-            <img
-              src="/brand/buildunix-logo.svg"
-              alt="BuildUNIX"
-              className={styles.logo}
-              width="392"
-              height="150"
-            />
+            <div className={styles.logo} aria-label="BuildUNIX">
+              <img
+                src="/brand/buildunix-logo 2.svg"
+                alt="BuildUNIX"
+                className={styles.brandLogoImg}
+              />
+            </div>
             <p className={styles.tagline}>{siteMetadata.tagline}</p>
-            <p className={styles.meta}>Hyderabad, India {"\u00B7"} 2026</p>
+            <p className={styles.meta}>Hyderabad, India · 2026</p>
           </div>
 
           {footerColumns.map((column) => (
@@ -27,15 +25,10 @@ export default function SiteFooter() {
               <div className={styles.linkList}>
                 {column.links.map((link) => {
                   const isExternal = link.href.startsWith("mailto:");
-
                   return isExternal ? (
-                    <a key={link.label} href={link.href} className={styles.footerLink}>
-                      <BrandText text={link.label} />
-                    </a>
+                    <a key={link.label} href={link.href} className={styles.footerLink}>{link.label}</a>
                   ) : (
-                    <Link key={link.label} href={link.href} className={styles.footerLink}>
-                      <BrandText text={link.label} />
-                    </Link>
+                    <Link key={link.label} href={link.href} className={styles.footerLink}>{link.label}</Link>
                   );
                 })}
               </div>
@@ -44,7 +37,7 @@ export default function SiteFooter() {
         </div>
 
         <div className={styles.bottomStrip}>
-          {"\u00A9"} 2026 <BrandWordmark />. All rights reserved. Built for Indian PMC firms.
+          <div>© 2026 BUILDUNIX · DIGITIZING CONSTRUCTION EXECUTION</div>
         </div>
       </div>
     </footer>

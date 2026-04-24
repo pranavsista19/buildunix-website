@@ -1,0 +1,471 @@
+/* ── Hero ───────────────────────────────────────────── */
+.hero {
+  padding-top: calc(var(--header-height) + clamp(3.5rem, 6vw, 5.5rem));
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, color-mix(in oklab, var(--accent) 9%, transparent), transparent 60%);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.heroTitle {
+  font-family: var(--ff-display);
+  font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  color: var(--text);
+  margin: 0.85rem 0 0;
+  text-wrap: balance;
+}
+
+.heroBody {
+  max-width: 42rem;
+  margin: 1.1rem 0 0;
+  color: var(--text-2);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.65;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: var(--elevated);
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.heroBadgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-success);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+/* ── Pricing Grid ───────────────────────────────────── */
+.pricingSection {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.pricingCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  transition: border-color 0.2s, transform 0.25s var(--ease-out);
+}
+.pricingCard:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.pricingCardHighlight {
+  border-color: var(--accent-on-bg);
+  box-shadow: 0 0 0 1px var(--accent-on-bg), var(--shadow-card);
+  background: var(--surface);
+}
+.pricingCardHighlight:hover {
+  border-color: var(--accent-on-bg);
+  box-shadow: 0 0 0 1px var(--accent-on-bg), var(--shadow-dark);
+}
+
+.pricingBadge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--ff-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.pricingCardHead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pricingTierName {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.pricingCardHighlight .pricingTierName { color: var(--accent-on-bg); }
+
+.pricingPrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.pricingAmount {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.pricingPeriod {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.pricingDesc {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 0.25rem 0 0;
+}
+
+.pricingCta {
+  width: 100%;
+  justify-content: center;
+}
+
+.pricingDivider {
+  height: 1px;
+  background: var(--border);
+}
+
+.pricingFeatures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.pricingFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.45;
+}
+
+.pricingCheck {
+  color: var(--color-success);
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Comparison Table ───────────────────────────────── */
+.compareSection {
+  background: var(--bg-grad-1);
+  border-top: 1px solid var(--border);
+}
+
+.compareHead {
+  max-width: 40rem;
+  margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.thLabel, .th {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+.thLabel { width: 35%; }
+.th { width: 21.6%; text-align: center; }
+.thHighlight {
+  background: color-mix(in oklab, var(--accent) 6%, transparent);
+  color: var(--accent-on-bg);
+}
+
+.tr:hover td { background: var(--elevated); }
+
+.tdLabel, .td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  vertical-align: middle;
+}
+.tr:last-child td { border-bottom: none; }
+.tdLabel { font-weight: 500; color: var(--text); }
+.td { text-align: center; color: var(--text-muted); }
+.tdHighlight {
+  background: color-mix(in oklab, var(--accent) 4%, transparent);
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+/* ── Trust ──────────────────────────────────────────── */
+.trustSection {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.trustCard {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.2s;
+}
+.trustCard:hover { border-color: var(--border-strong); }
+
+.trustCheck {
+  font-size: 1.1rem;
+  color: var(--color-success);
+}
+
+.trustLabel {
+  font-family: var(--ff-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.trustBody {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── FAQ ────────────────────────────────────────────── */
+.faqSection {
+  background: var(--bg-grad-1);
+  border-top: 1px solid var(--border);
+}
+
+.faqLayout {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.faqLeft {
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+}
+
+.faqTitle {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  color: var(--text);
+  margin: 0.75rem 0 0;
+}
+.faqTitle em { font-style: normal; color: var(--accent-on-bg); }
+
+.faqSubtitle {
+  margin-top: 1.25rem;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.faqLink {
+  color: var(--accent-on-bg);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-on-bg);
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.faqLink:hover { opacity: 0.75; }
+
+.faqList {
+  display: flex;
+  flex-direction: column;
+}
+
+.faqItem { border-bottom: 1px solid var(--border); }
+.faqItem:first-child { border-top: 1px solid var(--border); }
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 0;
+  text-align: left;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  cursor: pointer;
+  background: none;
+  border: none;
+  transition: color 0.2s;
+}
+.faqQuestionOpen { color: var(--accent-on-bg); }
+
+.faqChevron {
+  font-size: 1.4rem;
+  line-height: 1;
+  font-weight: 300;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.25s var(--ease-out), color 0.2s;
+  width: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+.faqChevronOpen { transform: rotate(45deg); color: var(--accent-on-bg); }
+
+.faqAnswer {
+  padding: 0 0 1.25rem;
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 1.7;
+  max-width: 48rem;
+  animation: floatIn 0.25s var(--ease-out) both;
+}
+
+/* ── CTA ────────────────────────────────────────────── */
+.ctaSection {
+  padding: clamp(5rem, 8vw, 8rem) 0;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 28rem),
+    var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.ctaCard {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-dark);
+}
+
+.ctaCard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 55%),
+    radial-gradient(ellipse 40% 60% at 0% 100%, color-mix(in oklab, var(--accent) 4%, transparent), transparent 50%);
+  pointer-events: none;
+}
+
+.ctaTitle {
+  font-family: var(--ff-display);
+  font-size: clamp(1.75rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text);
+  line-height: 1.08;
+  text-wrap: balance;
+  position: relative;
+}
+
+.ctaBody {
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  color: var(--text-2);
+  line-height: 1.65;
+  max-width: 44rem;
+  position: relative;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  position: relative;
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .pricingGrid { grid-template-columns: 1fr; max-width: 32rem; margin-inline: auto; }
+  .trustGrid { grid-template-columns: repeat(2, 1fr); }
+  .faqLayout { grid-template-columns: 1fr; }
+  .faqLeft { position: static; }
+}
+
+@media (max-width: 640px) {
+  .trustGrid { grid-template-columns: 1fr; }
+  .pricingGrid { max-width: 100%; }
+}

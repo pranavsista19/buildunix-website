@@ -1,3 +1,3 @@
 .reveal {
-  will-change: transform, opacity;
+  /* will-change applied dynamically in JS only */
 }

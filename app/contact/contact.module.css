@@ -1,3 +1,4 @@
+/* ── Hero ───────────────────────────────────────────── */
 .hero {
   position: relative;
   z-index: 3;
@@ -5,29 +6,30 @@
   overflow: clip;
   padding: clamp(5rem, 8vw, 8rem) 0 clamp(4.5rem, 7vw, 7rem);
   background:
-    radial-gradient(circle at 82% 16%, rgb(var(--ember-light-rgb) / 0.16), transparent 24rem),
-    linear-gradient(180deg, var(--color-charcoal), var(--color-deep-char));
+    radial-gradient(circle at 76% 20%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 32rem),
+    var(--bg-grad-1);
 }
 
 .hero::after {
   content: "";
   position: absolute;
-  inset: auto 0 0;
-  height: 35%;
-  background: linear-gradient(180deg, transparent, rgb(var(--warm-white-rgb) / 0.08));
+  inset: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: linear-gradient(180deg, black, transparent 84%);
   pointer-events: none;
 }
 
 .heroGrid {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+  gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
-  gap: clamp(0.5rem, 2vw, 1.5rem);
-  height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
 }
 
 .heroCopy {
@@ -35,42 +37,38 @@
 }
 
 .heroTitle {
-  max-width: 12ch;
   margin: 0;
-  color: var(--color-dark-text);
-  font-family: var(--font-heading), sans-serif;
-  font-size: clamp(3rem, 6.3vw, 5.7rem);
+  color: var(--text);
+  font-family: var(--ff-display);
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
   font-weight: 800;
-  letter-spacing: -0.055em;
-  line-height: 1.02;
-  text-wrap: balance;
+  letter-spacing: -0.05em;
+  line-height: 0.97;
 }
 
 .heroBody {
-  max-width: 42rem;
+  max-width: 47rem;
   margin: 1.35rem 0 0;
-  color: var(--color-ember-light);
-  font-size: clamp(1.08rem, 1.6vw, 1.35rem);
+  color: var(--text-2);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
   line-height: 1.75;
 }
 
 .heroShowcase {
   width: min(100%, 42rem);
-  justify-self: end;
 }
 
 .heroSignal {
   padding: clamp(1.35rem, 3vw, 1.8rem);
-  border: 1px solid rgb(var(--stone-border-rgb) / 0.18);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-xl);
-  background: rgb(var(--warm-white-rgb) / 0.07);
-  box-shadow: var(--shadow-dark);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
-.heroSignal span,
-.formKicker {
-  color: var(--color-ember-light);
-  font-family: var(--font-mono), monospace;
+.heroSignal span {
+  color: var(--text-muted);
+  font-family: var(--ff-mono);
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -79,25 +77,25 @@
 .heroSignal strong {
   display: block;
   margin-top: 0.9rem;
-  color: var(--color-dark-text);
-  font-family: var(--font-heading), sans-serif;
-  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  color: var(--text);
+  font-family: var(--ff-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
   letter-spacing: -0.035em;
   line-height: 1.08;
 }
 
 .heroSignal p {
   margin: 0.9rem 0 0;
-  color: var(--color-dark-secondary);
+  color: var(--text-2);
   line-height: 1.8;
 }
 
+/* ── Content Section ───────────────────────────────── */
 .contentSection {
   margin-top: 0;
   padding-top: clamp(1.5rem, 3vw, 2.5rem);
-  background:
-    radial-gradient(circle at 12% 8%, rgb(var(--ember-orange-rgb) / 0.1), transparent 22rem),
-    var(--color-warm-white);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
 }
 
 .grid {
@@ -109,13 +107,12 @@
   align-items: start;
 }
 
+/* ── Form Shell ────────────────────────────────────── */
 .formShell,
 .sidebarSticky {
-  border: 1px solid rgb(var(--stone-border-rgb) / 0.58);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-2xl);
-  background:
-    linear-gradient(180deg, rgb(var(--warm-white-rgb) / 0.82), rgb(var(--warm-off-white-rgb) / 0.74)),
-    var(--color-warm-off-white);
+  background: var(--surface);
   box-shadow: var(--shadow-card);
 }
 
@@ -124,15 +121,19 @@
 }
 
 .formKicker {
-  color: var(--color-ember-orange);
+  color: var(--accent-on-bg);
+  font-family: var(--ff-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .formTitle,
 .sidebarTitle {
   margin: 0.55rem 0 0;
-  color: var(--color-charcoal);
-  font-family: var(--font-heading), sans-serif;
-  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  color: var(--text);
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1.06;
@@ -146,10 +147,11 @@
 .formBody {
   max-width: 42rem;
   margin: 1rem 0 1.6rem;
-  color: var(--color-text-secondary);
+  color: var(--text-2);
   line-height: 1.8;
 }
 
+/* ── Sidebar ───────────────────────────────────────── */
 .sidebarSticky {
   position: sticky;
   top: calc(var(--header-height) + 1.25rem);
@@ -166,9 +168,15 @@
   position: relative;
   padding: 1.1rem 1.1rem 1.1rem 1.25rem;
   overflow: hidden;
-  border: 1px solid rgb(var(--stone-border-rgb) / 0.38);
-  border-radius: 1.25rem;
-  background: rgb(var(--warm-white-rgb) / 0.64);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--elevated);
+  transition: border-color 0.2s, transform 0.25s var(--ease-out);
+}
+
+.reasonCard:hover {
+  border-color: var(--border-strong);
+  transform: translateX(3px);
 }
 
 .reasonCard::before {
@@ -176,12 +184,12 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: 3px;
-  background: var(--color-ember-orange);
+  background: var(--accent-on-bg);
 }
 
 .reasonCard > span {
-  color: var(--color-ember-orange);
-  font-family: var(--font-heading), sans-serif;
+  color: var(--accent-on-bg);
+  font-family: var(--ff-display);
   font-size: 1.3rem;
   font-weight: 800;
   line-height: 1;
@@ -189,26 +197,28 @@
 
 .reasonCard h3 {
   margin: 0.45rem 0 0.45rem;
-  color: var(--color-charcoal);
-  font-family: var(--font-heading), sans-serif;
-  font-size: 1.2rem;
-  font-weight: 800;
+  color: var(--text);
+  font-family: var(--ff-display);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 700;
   letter-spacing: -0.035em;
 }
 
 .reasonCard p {
   margin: 0;
-  color: var(--color-charcoal);
+  color: var(--text-2);
   line-height: 1.7;
+  font-size: 14px;
 }
 
+/* ── Email Card ────────────────────────────────────── */
 .emailCard {
   margin-top: 1rem;
   padding: 1.1rem;
-  border: 1px solid rgb(var(--stone-border-rgb) / 0.34);
-  border-radius: 1.25rem;
-  background: rgb(var(--warm-white-rgb) / 0.66);
-  color: var(--color-warm-black);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--elevated);
+  color: var(--text-2);
 }
 
 .emailCard p {
@@ -221,11 +231,13 @@
 }
 
 .emailCard a {
-  color: var(--color-deep-ember);
-  font-weight: 800;
+  color: var(--accent-on-bg);
+  font-weight: 700;
   text-decoration: underline;
+  text-underline-offset: 0.25rem;
 }
 
+/* ── Responsive ────────────────────────────────────── */
 @media (max-width: 991px) {
   .heroGrid,
   .grid {
@@ -248,6 +260,6 @@
 
 @media (max-width: 767px) {
   .heroTitle {
-    font-size: clamp(2.55rem, 11vw, 3.75rem);
+    font-size: clamp(2.4rem, 11vw, 3.6rem);
   }
 }

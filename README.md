@@ -1,6 +1,6 @@
-# BuildUnix Marketing Site
+# BuildUnix  Website
 
-Three-page marketing site for BuildUnix, built with Next.js App Router, plain JavaScript, CSS Modules, and a token-driven global stylesheet.
+BuildUnix, built with Next.js App Router, plain JavaScript, CSS Modules, and a token-driven global stylesheet.
 
 ## Quick start
 

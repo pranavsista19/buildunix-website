@@ -53,7 +53,10 @@ export default function Reveal({
       rotate: 0,
       duration,
       delay,
-      ease: "power4.out"
+      ease: "power4.out",
+      onComplete: () => {
+        element.style.willChange = "auto";
+      }
     });
 
     tween.pause(0);
@@ -62,7 +65,10 @@ export default function Reveal({
       trigger: element,
       start,
       once,
-      onEnter: () => tween.play(0)
+      onEnter: () => {
+        element.style.willChange = "transform, opacity";
+        tween.play(0);
+      }
     });
 
     return () => {

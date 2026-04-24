@@ -32,6 +32,8 @@ export default function OptionalMediaFrame({
           src={src}
           alt={alt}
           loading="lazy"
+          width="800"
+          height="600"
           className={`${styles.image} ${loaded ? styles.imageLoaded : ""}`}
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}

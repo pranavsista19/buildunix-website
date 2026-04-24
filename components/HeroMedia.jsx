@@ -70,7 +70,7 @@ export default function HeroMedia() {
           loop
           playsInline
           preload={isMobile ? "metadata" : "auto"}
-          poster="/media/hero/buildunix-hero-poster.png"
+          poster="/media/hero/buildunix-hero-poster-opt.webp"
           onError={() => {
             setVideoFailed(true);
           }}

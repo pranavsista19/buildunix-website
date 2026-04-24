@@ -1,4 +1,4 @@
-import { DM_Mono, Manrope, Space_Grotesk } from "next/font/google";
+import { DM_Mono, Epilogue, Syne } from "next/font/google";
 import "@/app/globals.css";
 import PageTransition from "@/components/PageTransition";
 import ParticlesBackground from "@/components/ParticlesBackground";
@@ -8,15 +8,15 @@ import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 import { siteMetadata, siteUrl } from "@/lib/site-content";
 import { softwareApplicationJsonLd } from "@/lib/seo";
 
-const headingFont = Space_Grotesk({
+const headingFont = Syne({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   display: "swap",
   preload: true,
   variable: "--font-heading"
 });
 
-const bodyFont = Manrope({
+const bodyFont = Epilogue({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
@@ -37,9 +37,9 @@ export const metadata = {
   title: siteMetadata.homeTitle,
   description: siteMetadata.homeDescription,
   icons: {
-    icon: "/brand/buildunix-icon.png",
-    shortcut: "/brand/buildunix-icon.png",
-    apple: "/brand/buildunix-icon.png"
+    icon: "/brand/buildunix-icon.webp",
+    shortcut: "/brand/buildunix-icon.webp",
+    apple: "/brand/buildunix-icon.webp"
   },
   alternates: {
     canonical: "/"
@@ -78,7 +78,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="dark">
       <head>
         <link
           rel="preload"
@@ -104,6 +104,7 @@ export default function RootLayout({ children }) {
           <ParticlesBackground />
           <div className="siteShell">
             <SiteHeader />
+            <div id="scroll-sentinel" style={{position:"absolute",top:0,height:1,width:"100%",pointerEvents:"none"}} aria-hidden="true" />
             <PageTransition>
               <main id="main-content">{children}</main>
             </PageTransition>
