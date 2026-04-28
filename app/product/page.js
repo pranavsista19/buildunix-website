@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
   title: "Product — BuildUNIX Construction Execution Platform",
   description:
-    "See how BuildUNIX enforces 14-phase construction sequencing, mandates tamper-proof photo evidence, tracks snags formally, and generates AI daily reports automatically.",
+    "See how BuildUNIX enforces phase-locked construction sequencing, mandates tamper-proof photo evidence, tracks snags formally, and generates AI daily reports automatically.",
   path: "/product"
 });
 

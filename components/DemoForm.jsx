@@ -119,7 +119,7 @@ export default function DemoForm({ className }) {
         </div>
       </div>
       <button type="submit" className={`button buttonAccent ${styles.formSubmit}`}>
-        Request a pilot →
+        Book a pilot →
       </button>
       <p className={styles.formNote}>
         NO CREDIT CARD · SHIP IN UNDER A WEEK · FREE 30-DAY PILOT

@@ -16,7 +16,7 @@ export default function ContactExperience() {
           <div className={styles.heroCopy}>
             <span className="sectionLabel" data-invert="true">
               <span className="eyebrowRule" aria-hidden="true" />
-              Book a Demo
+              Book a Pilot
             </span>
             <SplitTextReveal as="h1" className={styles.heroTitle} type="words">
               Let&apos;s show you BuildUNIX on a real site.
@@ -42,7 +42,7 @@ export default function ContactExperience() {
             <div className={styles.formShell}>
               <span className={styles.formKicker}>Request access to the walkthrough</span>
               <h2 className={styles.formTitle}>
-                <BrandText text="Book your BuildUNIX demo" />
+                <BrandText text="Book a Pilot" />
               </h2>
               <p className={styles.formBody}>
                 Tell us a little about your firm and project. We&apos;ll reach
@@ -54,7 +54,7 @@ export default function ContactExperience() {
 
           <Reveal className={styles.sidebar} x={70} y={30} delay={0.08}>
             <div className={styles.sidebarSticky}>
-              <h2 className={styles.sidebarTitle}>Why book a demo?</h2>
+              <h2 className={styles.sidebarTitle}>Why book a pilot?</h2>
               <div className={styles.reasonList}>
                 {contactReasons.map((reason, index) => (
                   <article key={reason.title} className={styles.reasonCard}>

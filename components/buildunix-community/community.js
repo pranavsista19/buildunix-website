@@ -74,7 +74,7 @@ export function buildCommunity(scene) {
 
     // GF
     const gfGeo = new THREE.BoxGeometry(w - 1, fH * 1.5, d - 1);
-    const gf = new THREE.Mesh(gfGeo, materials.facadeDark);
+    const gf = new THREE.Mesh(gfGeo, materials.facadePrimary);
     gf.position.y = (fH * 1.5) / 2;
     gf.userData = { ...bldgA };
     gf.castShadow = true;
@@ -82,8 +82,8 @@ export function buildCommunity(scene) {
     groupA.add(gf);
     currentY += fH * 1.5;
 
-    for (let i = 0; i < 14; i++) {
-      const slab = new THREE.Mesh(new THREE.BoxGeometry(w + 0.2, 0.3, d + 0.2), materials.facadeDark);
+    for (let i = 0; i < 8; i++) {
+      const slab = new THREE.Mesh(new THREE.BoxGeometry(w + 0.2, 0.3, d + 0.2), materials.facadeSecondary);
       slab.position.y = currentY + 0.15;
       slab.userData = { ...bldgA };
       slab.castShadow = true;
@@ -132,7 +132,7 @@ export function buildCommunity(scene) {
     const fH = 1.2;
 
     const gfGeo = new THREE.BoxGeometry(w - 1, fH * 1.5, d - 1);
-    const gf = new THREE.Mesh(gfGeo, materials.facadeDark);
+    const gf = new THREE.Mesh(gfGeo, materials.facadePrimary);
     gf.position.y = (fH * 1.5) / 2;
     gf.userData = { ...bldgB };
     gf.castShadow = true;
@@ -140,9 +140,9 @@ export function buildCommunity(scene) {
     groupB.add(gf);
     currentY += fH * 1.5;
 
-    for (let i = 0; i < 16; i++) {
-      const isClad = i < 9;
-      const slab = new THREE.Mesh(new THREE.BoxGeometry(w + 0.2, 0.3, d + 0.2), isClad ? materials.facadeDark : new THREE.MeshStandardMaterial({color: 0x4a4a4a}));
+    for (let i = 0; i < 8; i++) {
+      const isClad = i < 5;
+      const slab = new THREE.Mesh(new THREE.BoxGeometry(w + 0.2, 0.3, d + 0.2), isClad ? materials.facadeSecondary : new THREE.MeshStandardMaterial({color: 0x808080}));
       slab.position.y = currentY + 0.15;
       slab.userData = { ...bldgB };
       slab.castShadow = true;
@@ -187,7 +187,7 @@ export function buildCommunity(scene) {
     const fH = 1.2;
 
     const gfGeo = new THREE.BoxGeometry(w - 1, fH * 1.5, d - 1);
-    const gf = new THREE.Mesh(gfGeo, materials.facadeDark);
+    const gf = new THREE.Mesh(gfGeo, materials.facadePrimary);
     gf.position.y = (fH * 1.5) / 2;
     gf.userData = { ...bldgC };
     gf.castShadow = true;
@@ -195,9 +195,9 @@ export function buildCommunity(scene) {
     groupC.add(gf);
     currentY += fH * 1.5;
 
-    for (let i = 0; i < 12; i++) {
-      const isClad = i < 4;
-      const slab = new THREE.Mesh(new THREE.BoxGeometry(w + 0.2, 0.3, d + 0.2), isClad ? materials.facadeDark : new THREE.MeshStandardMaterial({color: 0x3a3a3a}));
+    for (let i = 0; i < 8; i++) {
+      const isClad = i < 3;
+      const slab = new THREE.Mesh(new THREE.BoxGeometry(w + 0.2, 0.3, d + 0.2), isClad ? materials.facadeSecondary : new THREE.MeshStandardMaterial({color: 0x707070}));
       slab.position.y = currentY + 0.15;
       slab.userData = { ...bldgC };
       groupC.add(slab);
@@ -230,7 +230,7 @@ export function buildCommunity(scene) {
     groupCH.position.set(clubhouse.x, clubhouse.y, clubhouse.z);
     scene.add(groupCH);
 
-    const body = new THREE.Mesh(new THREE.BoxGeometry(18, 4, 12), materials.facadeDark);
+    const body = new THREE.Mesh(new THREE.BoxGeometry(18, 4, 12), materials.facadeDark); // Now wood/brown
     body.position.y = 2;
     body.userData = { ...clubhouse };
     body.castShadow = true;

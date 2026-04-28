@@ -6,7 +6,7 @@ export function createBuildingLabel(buildingObj, mesh, totalHeight) {
   div.innerHTML = `
     <span class="label-dot status-${buildingObj.status}"></span>
     <span class="label-name">${buildingObj.name}</span>
-    <span class="label-phase">Phase ${buildingObj.currentPhase}/14</span>
+    <span class="label-phase">Phase ${buildingObj.currentPhase} of Template</span>
   `;
 
   const label = new CSS2DObject(div);

@@ -101,7 +101,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <SmoothScrollProvider>
-          <ParticlesBackground />
+
           <div className="siteShell">
             <SiteHeader />
             <div id="scroll-sentinel" style={{position:"absolute",top:0,height:1,width:"100%",pointerEvents:"none"}} aria-hidden="true" />

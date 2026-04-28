@@ -13,6 +13,8 @@ import {
   whyBuildUnixStats
 } from "@/lib/site-content";
 
+import CommunicationComparison from "@/components/about/CommunicationComparison";
+
 export default function AboutExperience() {
   return (
     <>
@@ -29,14 +31,7 @@ export default function AboutExperience() {
             <p className={styles.heroBody}>
               <BrandText text="BuildUNIX replaces verbal approvals, untracked defects, and screenshot-driven updates with hard-gated sequencing, tamper-proof photo evidence, live visibility, and automatic reporting." />
             </p>
-            <div className={styles.heroActions}>
-              <Link href="/contact" className="button buttonPrimary">
-                Book a Demo <span className="buttonArrow">{"\u2192"}</span>
-              </Link>
-              <Link href="/#how-it-works" className={styles.heroLink}>
-                See the workflow
-              </Link>
-            </div>
+
           </div>
 
           <Reveal className={styles.heroShowcase} x={80} y={20}>
@@ -44,6 +39,8 @@ export default function AboutExperience() {
           </Reveal>
         </div>
       </section>
+
+      <CommunicationComparison />
 
       <section className={`section ${styles.reasonsSection}`}>
         <div className={`containerWide ${styles.reasonsGrid}`}>
@@ -152,20 +149,7 @@ export default function AboutExperience() {
         </div>
       </section>
 
-      <section className={styles.ctaSection}>
-        <div className="container">
-          <Reveal className={styles.ctaCard}>
-            <h2><BrandText text="See why BuildUNIX works better on a real site." /></h2>
-            <p>
-              We&apos;ll walk you through the dependency engine, photo evidence
-              flow, snag lifecycle, and live heatmap on an active project.
-            </p>
-            <Link href="/contact" className="button buttonPrimary">
-              Book Your Demo <span className="buttonArrow">{"\u2192"}</span>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
+
     </>
   );
 }

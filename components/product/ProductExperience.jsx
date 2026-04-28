@@ -180,13 +180,7 @@ function HeroSection() {
               <BrandText text="BuildUNIX enforces the sequencing, evidence, accountability, and reporting that Indian PMC firms need — without adding manual overhead to the team." />
             </p>
           </Reveal>
-          <Reveal y={12} delay={0.28}>
-            <div className={styles.heroActions}>
-              <Link href="/contact" className="button buttonPrimary">
-                Book a Demo <span className="buttonArrow">→</span>
-              </Link>
-            </div>
-          </Reveal>
+
         </div>
 
         <Reveal className={styles.heroVisual} x={60} y={20} delay={0.1}>
@@ -221,10 +215,10 @@ function PhaseLockSection() {
               No phase starts without <em>evidence</em>.
             </h2>
             <p className="sectionBody">
-              Our dependency engine hard-gates every one of the 14 construction phases across all trades. No subphase can begin unless its predecessors are PMC-approved. No verbal override. No workaround.
+              Our dependency engine hard-gates every phase template across all trades. No subphase can begin unless its predecessors are PMC-approved. No verbal override. No workaround.
             </p>
             <div className={styles.phaseLockStats}>
-              <div className={styles.phaseLockStat}><strong>14</strong><span>Construction phases</span></div>
+              <div className={styles.phaseLockStat}><strong>Template</strong><span>Phase sequencing</span></div>
               <div className={styles.phaseLockStat}><strong>6</strong><span>Dependency types</span></div>
               <div className={styles.phaseLockStat}><strong>128+</strong><span>Subphases tracked</span></div>
             </div>
@@ -361,7 +355,7 @@ function StepVisual({ id }) {
   const visuals = {
     structure: (
       <div className={styles.visualStructure}>
-        {[["PROJECT","Greenfield Residences"],["BLOCKS","Tower A · Tower B · Tower C"],["PHASES","14 auto-loaded"],["DEPENDENCIES","Pre-configured ✓"]].map(([k,v]) => (
+        {[["PROJECT","Greenfield Residences"],["BLOCKS","Tower A · Tower B · Tower C"],["PHASES","Phase template"],["DEPENDENCIES","Pre-configured ✓"]].map(([k,v]) => (
           <div key={k} className={styles.vsRow}><span className={styles.vsLabel}>{k}</span><span className={styles.vsVal}>{v}</span></div>
         ))}
       </div>
@@ -439,29 +433,7 @@ function FeaturesSection() {
   );
 }
 
-/* ── Roles ──────────────────────────────────────────── */
-function RolesSection() {
 
-  return (
-    <section className={`section ${styles.rolesSection}`}>
-      <div className="containerWide">
-        <Reveal className={styles.rolesHead}>
-          <span className="sectionLabel"><span className="eyebrowRule" aria-hidden="true" />USER ROLES</span>
-          <h2 className="sectionTitle">Every stakeholder gets the <em>right view</em>.</h2>
-          <p className="sectionBody">Seven distinct roles, each with exactly the visibility and permissions their job requires — and nothing more.</p>
-        </Reveal>
-        <div className={styles.rolesGrid}>
-          {roles.map((r, i) => (
-            <Reveal key={r.id} className={styles.roleCard} delay={i * 0.05} y={16}>
-              <h3 className={styles.roleTitle}>{r.title}</h3>
-              <p className={styles.roleSummary}>{r.summary}</p>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ── Testimonials ───────────────────────────────────── */
 function TestimonialsSection() {
@@ -535,7 +507,7 @@ function FAQSection() {
             <h2 className={styles.faqTitle}>
               Answers to the<br /><em>real questions.</em>
             </h2>
-            <p className={styles.faqSubtitle}>Still have questions? <Link href="/contact" className={styles.faqLink}>Talk to our team →</Link></p>
+            <p className={styles.faqSubtitle}>Still have questions? Contact our team for more info.</p>
           </Reveal>
 
           <div className={styles.faqList}>
@@ -562,38 +534,33 @@ function FAQSection() {
 }
 
 /* ── Final CTA ──────────────────────────────────────── */
-function CtaSection() {
-  return (
-    <section className={styles.ctaSection}>
-      <div className="container">
-        <Reveal className={styles.ctaCard}>
-          <span className="sectionLabel">GET STARTED</span>
-          <h2 className={styles.ctaTitle}><BrandText text="See BuildUNIX running on a real site." /></h2>
-          <p className={styles.ctaBody}>
-            We&apos;ll walk you through the dependency engine, photo evidence flow, snag lifecycle, and live heatmap on an active project. Under 30 minutes.
-          </p>
-          <div className={styles.ctaActions}>
-            <Link href="/contact" className="button buttonPrimary">Book a Demo <span className="buttonArrow">→</span></Link>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
+
 
 /* ── Root ───────────────────────────────────────────── */
 export default function ProductExperience() {
   return (
     <>
       <HeroSection />
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="containerWide">
+          <div className="sectionLabel">BETA FEATURE</div>
+          <h2 className="sectionTitle" style={{ marginBottom: "1.5rem" }}>3D Community <em>Visualization</em></h2>
+          <p className="sectionBody" style={{ marginBottom: "2rem" }}>
+            Explore your project in a fully interactive 3D environment. This beta feature allows PMs and clients to visualize construction progress, identify zones, and navigate the site layout with architectural precision.
+          </p>
+          <div style={{ marginBottom: "0" }}>
+            <Link href="/demo-3d" className="button buttonPrimary">
+              View 3D Demo <span className="buttonArrow">→</span>
+            </Link>
+          </div>
+        </div>
+      </section>
       <PhaseLockSection />
       <LiveOpsSection />
       <HowItWorksSection />
       <FeaturesSection />
-      <RolesSection />
       <TestimonialsSection />
       <FAQSection />
-      <CtaSection />
     </>
   );
 }

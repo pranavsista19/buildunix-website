@@ -22,7 +22,7 @@ export function showTooltip(data) {
       early_stage: 'Early Stage'
     }[data.status] || data.status;
     
-    meta.textContent = `${data.name.split(' — ')[0]} · Phase ${data.currentPhase} · ${statusLabel}`;
+    meta.textContent = `${data.name.split(' — ')[0]} · Phase ${data.currentPhase} of Template · ${statusLabel}`;
   }
 
   t.classList.add('visible');

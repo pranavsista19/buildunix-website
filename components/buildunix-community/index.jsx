@@ -154,7 +154,7 @@ export default function BuildunixCommunitySection() {
     <section className="buildunix-community-section" id="how-it-works" ref={sectionRef}>
       <div className="community-intro">
         <div className="eyebrow">LIVE PROJECT VIEW</div>
-        <h2>One community.<br/>14 phases.<br/>Zero chaos.</h2>
+        <h2>One community.<br/>Phase template.<br/>Zero chaos.</h2>
         <p>BuildUNIX manages every tower, every common area,
         and every phase simultaneously. Hover any building
         to see its live construction status.</p>

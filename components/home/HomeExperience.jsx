@@ -62,7 +62,7 @@ function HeroSection() {
       <div className={styles.heroInner}>
         <div className={styles.heroBadge}>
           <span className={styles.heroDot} />
-          <span>v0.9 · Pilots shipping in under 7 days</span>
+          <span>Pilots shipping in under 7 days</span>
         </div>
 
         <h1 className={styles.heroTitle}>
@@ -145,7 +145,7 @@ function HighlightsSection() {
     {
       ix: "[01] PHASE-LOCK",
       title: "No phase starts without evidence.",
-      body: "Our logic engine enforces prerequisites across 14 phases × 5 trades. Prolonged delays become impossible — every handoff is provable.",
+      body: "Our logic engine enforces prerequisites across phase-locked workflows × 5 trades. Prolonged delays become impossible — every handoff is provable.",
       href: "/product#phase-lock",
     },
     {
@@ -270,7 +270,22 @@ function DifferentiatorsSection() {
 
 /* ── Contact ────────────────────────────────────────── */
 
+/* ── Contact ────────────────────────────────────────── */
 function ContactSection() {
+  let btnRAF = null;
+  const onBtnMove = (e) => {
+    if (btnRAF) return;
+    const el = e.currentTarget;
+    const cx = e.clientX;
+    const cy = e.clientY;
+    btnRAF = requestAnimationFrame(() => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty("--x", `${((cx - r.left) / r.width) * 100}%`);
+      el.style.setProperty("--y", `${((cy - r.top) / r.height) * 100}%`);
+      btnRAF = null;
+    });
+  };
+
   return (
     <section id="contact" className={styles.contactSection}>
       <div className="containerWide">
@@ -278,7 +293,7 @@ function ContactSection() {
           <div className={styles.contactSide}>
             <div className="sectionLabel">GET STARTED</div>
             <h3 className={styles.contactTitle}>
-              Book a <em>pilot</em>.<br />Shipped under a week.
+              Book a <em>Pilot</em>.<br />Shipped under a week.
             </h3>
             <p className={styles.contactBody}>
               Tell us where you&apos;re bleeding — quality, time, or money. We&apos;ll configure
@@ -298,42 +313,93 @@ function ContactSection() {
                 <div className={styles.contactMetaV}>Bengaluru · Hyderabad</div>
               </div>
             </div>
+
           </div>
-          <DemoForm />
+
+          <div className={styles.proofPanel}>
+            <div className={styles.proofTimeline}>
+              <div className={styles.proofLabel}>WHAT HAPPENS NEXT</div>
+              <div className={styles.timelineSteps}>
+                {[
+                  {
+                    n: 1,
+                    t: "You submit the form",
+                    d: "We review your project type and site count. Usually same day.",
+                  },
+                  {
+                    n: 2,
+                    t: "We configure your workflow",
+                    d: "Phases configured to your workflow. Done in under 48 hours.",
+                  },
+                  {
+                    n: 3,
+                    t: "Your team gets access",
+                    d: "PMC Engineers, Contractors, and Management onboarded with a 30-minute walkthrough.",
+                  },
+                  {
+                    n: 4,
+                    t: "First site goes live",
+                    d: "Typically day 5-7. Your crew starts capturing evidence immediately.",
+                  },
+                ].map((s) => (
+                  <div key={s.n} className={styles.timelineStep}>
+                    <div className={styles.timelineIndicator}>
+                      <div className={styles.timelineDot}>{s.n}</div>
+                      <div className={styles.timelineLine} />
+                    </div>
+                    <div className={styles.stepContent}>
+                      <div className={styles.stepTitle}>{s.t}</div>
+                      <div className={styles.stepDesc}>{s.d}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.proofDivider} />
+
+            <div className={styles.proofStats}>
+              {[
+                { v: "< 7 days", l: "Setup time" },
+                { v: "₹0", l: "Setup cost" },
+                { v: "30 days", l: "Free pilot" },
+              ].map((st) => (
+                <div key={st.l} className={styles.statItem}>
+                  <div className={styles.statNum}>{st.v}</div>
+                  <div className={styles.statLabel}>{st.l}</div>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.proofTrust}>
+              Tested on a ₹1,200 Cr project · Hyderabad · 2026
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
-  );
-}
 
-/* ── Final CTA ──────────────────────────────────────── */
-function FinalCTA() {
-  let finalRAF = null;
-  const onBtnMove = (e) => {
-    if (finalRAF) return;
-    const el = e.currentTarget;
-    const cx = e.clientX;
-    const cy = e.clientY;
-    finalRAF = requestAnimationFrame(() => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty("--x", `${((cx - r.left) / r.width) * 100}%`);
-      el.style.setProperty("--y", `${((cy - r.top) / r.height) * 100}%`);
-      finalRAF = null;
-    });
-  };
+        <div className={styles.contactDividerInner} />
 
-  return (
-    <section className={styles.finalCta}>
-      <h2 className={styles.finalCtaTitle}>
-        Built for the <em>ground truth</em>.<br />Shipped this week.
-      </h2>
-      <div className={styles.finalCtaBtns}>
-        <Link href="/contact" className="button buttonPrimary" onMouseMove={onBtnMove}>
-          Book a pilot →
-        </Link>
-        <Link href="/product" className="button buttonGhost" onMouseMove={onBtnMove}>
-          See the product
-        </Link>
+        <div className={styles.contactBottom}>
+          <h2 className={styles.contactBottomTitle}>
+            Built for the <em>ground truth</em>.<br />Shipped this week.
+          </h2>
+          <div className={styles.contactBottomBtns}>
+            <Link
+              href="/contact"
+              className={`button ${styles.contactBottomPrimary}`}
+              onMouseMove={onBtnMove}
+            >
+              Book a pilot →
+            </Link>
+            <Link
+              href="/product"
+              className="button buttonGhost"
+              onMouseMove={onBtnMove}
+            >
+              See the product
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -344,11 +410,10 @@ export default function HomeExperience() {
   return (
     <>
       <HeroSection />
-      <BuildunixCommunitySection />
+
       <HighlightsSection />
       <DifferentiatorsSection />
       <ContactSection />
-      <FinalCTA />
     </>
   );
 }

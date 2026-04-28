@@ -219,9 +219,6 @@ export default function SiteHeader() {
                 </svg>
               )}
             </button>
-            <Link href="/#contact" className={`button buttonPrimary ${styles.ctaBtn}`}>
-              Book a pilot →
-            </Link>
           </div>
 
           <button
@@ -258,9 +255,6 @@ export default function SiteHeader() {
           <button className={styles.mobileThemeToggle} onClick={toggleTheme}>
             {theme === "dark" ? "☀ Light mode" : "☾ Dark mode"}
           </button>
-          <Link href="/#contact" className="button buttonPrimary" onClick={closeMenu}>
-            Book a pilot →
-          </Link>
         </div>
       </div>
     </header>
