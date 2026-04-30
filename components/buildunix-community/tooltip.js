@@ -1,34 +1,39 @@
 export function showTooltip(data) {
-  const t = document.querySelector('.buildunix-community-tooltip');
-  if (!t) return;
+  const tooltip = document.querySelector('.buildunix-community-tooltip');
+  if (!tooltip) return;
 
-  const statusColor = {
-    complete: '#1A7A45',
-    in_progress: '#A06B0A',
-    early_stage: '#4A4A4A'
-  }[data.status] || '#A06B0A';
+  const nameEl = tooltip.querySelector('.tooltip-building-name');
+  const metaEl = tooltip.querySelector('.tooltip-meta');
+  const dotEl = tooltip.querySelector('.tooltip-status-dot');
 
-  const dot = t.querySelector('.tooltip-status-dot');
-  if (dot) dot.style.backgroundColor = statusColor;
+  if (nameEl) nameEl.textContent = data.name || 'Building';
   
-  const name = t.querySelector('.tooltip-building-name');
-  if (name) name.textContent = data.name;
-
-  const meta = t.querySelector('.tooltip-meta');
-  if (meta) {
-    const statusLabel = {
-      complete: 'Approved',
-      in_progress: 'In Progress',
-      early_stage: 'Early Stage'
-    }[data.status] || data.status;
-    
-    meta.textContent = `${data.name.split(' — ')[0]} · Phase ${data.currentPhase} of Template · ${statusLabel}`;
+  if (dotEl) {
+    const statusColor = data.status === 'complete' ? '#4B6F44' : (data.status === 'in_progress' ? '#E8690A' : '#71797E');
+    dotEl.style.backgroundColor = statusColor;
+    dotEl.style.color = statusColor;
   }
 
-  t.classList.add('visible');
+  let metaHtml = `
+    <div>Units: ${data.units || 'N/A'}</div>
+    <div>Status: ${data.statusLabel || 'Active'}</div>
+  `;
+
+  if (data.type === 'floor') {
+    metaHtml += `
+      <div class="tooltip-floor-info">
+        <span class="tooltip-phase">Floor ${data.floorIndex}: ${data.phase}</span>
+        <div style="font-size: 11px; color: rgba(255,255,255,0.6)">Current heatmap: Active</div>
+      </div>
+    `;
+  }
+
+  if (metaEl) metaEl.innerHTML = metaHtml;
+  
+  tooltip.classList.add('visible');
 }
 
 export function hideTooltip() {
-  const t = document.querySelector('.buildunix-community-tooltip');
-  if (t) t.classList.remove('visible');
+  const tooltip = document.querySelector('.buildunix-community-tooltip');
+  if (tooltip) tooltip.classList.remove('visible');
 }

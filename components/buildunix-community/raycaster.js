@@ -6,35 +6,35 @@ export const interactiveObjects = [];
 export function setupRaycaster(container, camera, controls, scene) {
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
-  let hoveredBuilding = null;
-  let lockedBuilding = null;
+  let hoveredObject = null;
+  let lockedObject = null;
 
   const onMouseMove = (e) => {
     const rect = container.getBoundingClientRect();
     mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
-    // Update tooltip position
+    // Update tooltip position (follow mouse)
     const tooltip = document.querySelector('.buildunix-community-tooltip');
     if (tooltip) {
-      const xOffset = 20;
-      const yOffset = 20;
+      const xOffset = 25;
+      const yOffset = -20;
       tooltip.style.left = `${e.clientX - rect.left + xOffset}px`;
       tooltip.style.top = `${e.clientY - rect.top + yOffset}px`;
     }
   };
 
   const onClick = () => {
-    if (hoveredBuilding) {
-      if (lockedBuilding === hoveredBuilding) {
-        lockedBuilding = null;
+    if (hoveredObject) {
+      if (lockedObject === hoveredObject) {
+        lockedObject = null;
         controls.autoRotate = true;
       } else {
-        lockedBuilding = hoveredBuilding;
+        lockedObject = hoveredObject;
         controls.autoRotate = false;
       }
-    } else if (lockedBuilding) {
-      lockedBuilding = null;
+    } else if (lockedObject) {
+      lockedObject = null;
       controls.autoRotate = true;
     }
   };
@@ -42,26 +42,34 @@ export function setupRaycaster(container, camera, controls, scene) {
   container.addEventListener('mousemove', onMouseMove, { passive: true });
   container.addEventListener('click', onClick);
 
-  function applyHoverMaterial(mesh) {
+  function applyHighlight(mesh) {
     mesh.userData._originalMaterial = mesh.material;
     const highlightMat = mesh.material.clone();
-    highlightMat.emissive = new THREE.Color(0xE8690A);
-    highlightMat.emissiveIntensity = 0.2;
+    
+    // Highlight effect
+    if (mesh.userData.type === 'floor') {
+      highlightMat.emissive = new THREE.Color(0xE8690A); // Warm orange highlight for floor
+      highlightMat.emissiveIntensity = 0.4;
+    } else {
+      highlightMat.emissive = new THREE.Color(0xABC4D1); // Soft blue for general buildings
+      highlightMat.emissiveIntensity = 0.2;
+    }
+    
     mesh.material = highlightMat;
   }
 
-  function restoreOriginalMaterial(mesh) {
-    if (mesh.userData._originalMaterial) {
+  function restoreMaterial(mesh) {
+    if (mesh && mesh.userData._originalMaterial) {
       mesh.material = mesh.userData._originalMaterial;
       delete mesh.userData._originalMaterial;
     }
   }
 
-  function onHoveringBuilding(building) {
-    if (!building) {
-      if (hoveredBuilding) {
-        restoreOriginalMaterial(hoveredBuilding);
-        hoveredBuilding = null;
+  function handleIntersections(intersectedObject) {
+    if (!intersectedObject) {
+      if (hoveredObject) {
+        restoreMaterial(hoveredObject);
+        hoveredObject = null;
         hideTooltip();
         controls.autoRotate = true;
         container.style.cursor = 'default';
@@ -69,21 +77,21 @@ export function setupRaycaster(container, camera, controls, scene) {
       return;
     }
 
-    if (hoveredBuilding !== building) {
-      if (hoveredBuilding) restoreOriginalMaterial(hoveredBuilding);
-      hoveredBuilding = building;
-      applyHoverMaterial(building);
-      showTooltip(building.userData);
+    if (hoveredObject !== intersectedObject) {
+      if (hoveredObject) restoreMaterial(hoveredObject);
+      hoveredObject = intersectedObject;
+      applyHighlight(intersectedObject);
+      showTooltip(intersectedObject.userData);
       controls.autoRotate = false;
       container.style.cursor = 'pointer';
     }
   }
 
   const update = () => {
-    if (lockedBuilding) return;
+    if (lockedObject) return;
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(interactiveObjects, false);
-    onHoveringBuilding(intersects.length > 0 ? intersects[0].object : null);
+    handleIntersections(intersects.length > 0 ? intersects[0].object : null);
   };
 
   const cleanup = () => {

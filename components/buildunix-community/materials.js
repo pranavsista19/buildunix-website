@@ -2,52 +2,104 @@ import * as THREE from 'three';
 
 export const getMaterials = () => {
   return {
-    facadePrimary: new THREE.MeshStandardMaterial({
-      color: 0xE8E0D0, roughness: 0.4, metalness: 0.1
+    // Premium Matte Concrete / Stone
+    facadePrimary: new THREE.MeshPhysicalMaterial({
+      color: 0xFAF6F1,
+      roughness: 0.6,
+      metalness: 0.05,
+      clearcoat: 0.1,
+      clearcoatRoughness: 0.3,
+      sheen: 0.2,
+      sheenRoughness: 0.5,
+      sheenColor: new THREE.Color(0xFFFFFF)
     }),
-    facadeDark: new THREE.MeshStandardMaterial({
-      color: 0x5C4033, roughness: 0.6, metalness: 0.1 // Warm wood/brown
+    
+    // Warm Architectural Wood / Dark Accents
+    facadeDark: new THREE.MeshPhysicalMaterial({
+      color: 0x2A241F,
+      roughness: 0.5,
+      metalness: 0.1,
+      clearcoat: 0.2,
+      clearcoatRoughness: 0.4
     }),
-    facadeSecondary: new THREE.MeshStandardMaterial({
-      color: 0xD4C5B3, roughness: 0.5, metalness: 0.1
+    
+    // Secondary Stone / Muted Beige
+    facadeSecondary: new THREE.MeshPhysicalMaterial({
+      color: 0xD9D2C9,
+      roughness: 0.7,
+      metalness: 0.0
     }),
+    
+    // Polished Realistic Glass
     glass: new THREE.MeshPhysicalMaterial({
-      color: 0xc9e4f5,
-      roughness: 0.01,
+      color: 0xABC4D1,
       metalness: 0.9,
-      transmission: 0.3,
-      thickness: 1.0,
-      opacity: 0.6,
+      roughness: 0.05,
+      transmission: 0.6, // Higher transmission for realism
+      thickness: 1.5,
+      ior: 1.5, // Index of refraction for glass
+      opacity: 0.4,
       transparent: true,
-      envMapIntensity: 4.0,
+      envMapIntensity: 2.5,
       side: THREE.DoubleSide,
-      depthWrite: false
+      depthWrite: false,
+      specularIntensity: 1.0,
+      specularColor: new THREE.Color(0xffffff)
     }),
+    
+    // Deep Reflective Water
     water: new THREE.MeshPhysicalMaterial({
-      color: 0x3a8fb7,
+      color: 0x1B3D52,
       roughness: 0.1,
-      metalness: 0.2,
-      opacity: 0.85,
+      metalness: 0.3,
+      transmission: 0.2,
+      opacity: 0.9,
       transparent: true,
-      envMapIntensity: 4.0
+      envMapIntensity: 3.0
     }),
+    
+    // Soft Architectural Grass (Muted Green)
     basePlate: new THREE.MeshStandardMaterial({
-      color: 0x4B6F44, roughness: 0.9, metalness: 0.0 // Forest green
+      color: 0x3D4A3A, // Muted, professional forest green
+      roughness: 0.95,
+      metalness: 0.0
     }),
+    
+    // Smooth Concrete / Road
     concrete: new THREE.MeshStandardMaterial({
-      color: 0xA9A9A9, roughness: 0.8, metalness: 0.1
+      color: 0x4A4A4A,
+      roughness: 0.7,
+      metalness: 0.05
     }),
-    grass: new THREE.MeshStandardMaterial({
-      color: 0x7CFC00, roughness: 1.0, metalness: 0.0 // Lawn green
-    }),
+    
+    // Stylized Tree Canopy
     treeCanopy: new THREE.MeshStandardMaterial({
-      color: 0x228B22, roughness: 0.8, metalness: 0.0 // Forest green
+      color: 0x2D3B2D,
+      roughness: 0.9,
+      metalness: 0.0
     }),
+    
+    // Industrial Crane Accent
     crane: new THREE.MeshStandardMaterial({
-      color: 0xFFD700, roughness: 0.2, metalness: 0.8 // Golden yellow
+      color: 0xD4AF37, // Brighter gold/brass for professional industrial look
+      roughness: 0.3,
+      metalness: 0.9
     }),
+    
+    // Structural Metal
     scaffolding: new THREE.MeshStandardMaterial({
-      color: 0xC0C0C0, roughness: 0.1, metalness: 0.9 // Silver
+      color: 0x71797E,
+      roughness: 0.2,
+      metalness: 0.8
+    }),
+
+    // Floor-specific highlights (Interactive)
+    floorHighlight: new THREE.MeshStandardMaterial({
+      color: 0xE8690A,
+      emissive: 0xE8690A,
+      emissiveIntensity: 0.5,
+      transparent: true,
+      opacity: 0.3
     })
   };
 };
