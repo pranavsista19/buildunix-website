@@ -26,15 +26,16 @@ export function showTooltip(data) {
     }[data.status] || data.status;
     
     const parts = data.name.split(' — ');
-    const subtitle = parts.length >= 2 && !parts[1].includes('Floor') ? parts[1] : '';
+    const mainName = parts[0];
+    const subName = parts.length > 1 && !parts[1].includes('Floor') ? parts[1] : '';
     const floorPart = parts.find(p => p.includes('Floor')) || '';
     const phaseString = data.phaseName ? `${data.phaseName} (Phase ${data.currentPhase})` : `Phase ${data.currentPhase} of Template`;
     
     meta.innerHTML = `
-      ${subtitle ? `<div style="margin-bottom: 2px; font-weight: 500; opacity: 0.8;">${subtitle}</div>` : ''}
-      ${floorPart ? `<div style="margin-bottom: 6px; font-weight: 700; font-size: 13px;">${floorPart}</div>` : ''}
+      ${subName ? `<div style="opacity: 0.8; font-size: 10px; margin-bottom: 2px;">${subName}</div>` : ''}
+      ${floorPart ? `<div style="margin-bottom: 6px; font-weight: 700; font-size: 13px; color: var(--color-text);">${floorPart}</div>` : ''}
       <div style="color: ${statusColor}; font-weight: 600;">${phaseString}</div>
-      <div style="margin-top: 4px;">Status: ${statusLabel}</div>
+      <div style="margin-top: 4px; opacity: 0.9;">Status: ${statusLabel}</div>
     `;
   }
 
