@@ -8,6 +8,7 @@ export function setupRaycaster(container, camera, controls, scene) {
   const mouse = new THREE.Vector2();
   let hoveredObject = null;
   let lockedObject = null;
+  let ignoredObject = null;
 
   const onMouseMove = (e) => {
     if (lockedObject) return; // Stop tooltip from running away from mouse when pinned
@@ -34,6 +35,7 @@ export function setupRaycaster(container, camera, controls, scene) {
 
   const onClick = (e) => {
     if (e.target.closest('.tooltip-close')) {
+      ignoredObject = lockedObject; // Ignore the object we just closed
       lockedObject = null;
       if (hoveredObject) {
         restoreOriginalMaterial(hoveredObject);
@@ -52,6 +54,7 @@ export function setupRaycaster(container, camera, controls, scene) {
       } else {
         lockedObject = hoveredObject;
         controls.autoRotate = false;
+        ignoredObject = null; // Clear ignore if explicitly pinned
       }
     } else if (lockedObject) {
       lockedObject = null;
@@ -78,6 +81,16 @@ export function setupRaycaster(container, camera, controls, scene) {
     }
   }
 
+  const handleNoHit = () => {
+    if (hoveredObject) {
+      restoreOriginalMaterial(hoveredObject);
+      hoveredObject = null;
+      hideTooltip();
+      controls.autoRotate = true;
+      container.style.cursor = 'default';
+    }
+  };
+
   const update = () => {
     if (lockedObject) return;
 
@@ -86,6 +99,16 @@ export function setupRaycaster(container, camera, controls, scene) {
 
     if (intersects.length > 0) {
       const object = intersects[0].object;
+      
+      if (object === ignoredObject) {
+        handleNoHit();
+        return;
+      }
+      
+      if (ignoredObject && object !== ignoredObject) {
+        ignoredObject = null; // Clear if we hovered onto something else
+      }
+
       if (hoveredObject !== object) {
         if (hoveredObject) restoreOriginalMaterial(hoveredObject);
         hoveredObject = object;
@@ -95,13 +118,8 @@ export function setupRaycaster(container, camera, controls, scene) {
         container.style.cursor = 'pointer';
       }
     } else {
-      if (hoveredObject) {
-        restoreOriginalMaterial(hoveredObject);
-        hoveredObject = null;
-        hideTooltip();
-        controls.autoRotate = true;
-        container.style.cursor = 'default';
-      }
+      ignoredObject = null; // Clear if we hit empty space
+      handleNoHit();
     }
   };
 
