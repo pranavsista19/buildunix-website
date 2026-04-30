@@ -38,9 +38,9 @@ export const metadata = {
   title: siteMetadata.homeTitle,
   description: siteMetadata.homeDescription,
   icons: {
-    icon: "/brand/buildunix-icon.webp",
-    shortcut: "/brand/buildunix-icon.webp",
-    apple: "/brand/buildunix-icon.webp"
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png"
   },
   alternates: {
     canonical: "/"
@@ -81,6 +81,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="dark">
       <head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="shortcut icon" href="/favicon.png" />
+        <meta name="msapplication-TileImage" content="/favicon.png" />
         <link
           rel="preload"
           href="/media/hero/buildunix-hero-poster.webp"
