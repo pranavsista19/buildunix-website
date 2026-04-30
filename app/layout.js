@@ -1,4 +1,5 @@
 import { DM_Mono, Epilogue, Syne } from "next/font/google";
+import Script from "next/script";
 import "@/app/globals.css";
 import PageTransition from "@/components/PageTransition";
 import ParticlesBackground from "@/components/ParticlesBackground";
@@ -111,7 +112,11 @@ export default function RootLayout({ children }) {
             <SiteFooter />
           </div>
         </SmoothScrollProvider>
-        <script src="https://api.landinghero.ai/public/assistant-widget.js" data-project-id="mDOm7vPZd4sZ5qup3Z88"></script>
+        <Script 
+          src="https://api.landinghero.ai/public/assistant-widget.js" 
+          data-project-id="mDOm7vPZd4sZ5qup3Z88"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
