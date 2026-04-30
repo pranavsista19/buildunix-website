@@ -1,7 +1,7 @@
 /* ── Hero ───────────────────────────────────────────── */
 .hero {
-  padding-top: calc(var(--header-height) + clamp(3rem, 6vw, 5rem));
-  padding-bottom: clamp(4rem, 7vw, 7rem);
+  padding-top: calc(var(--header-height) + clamp(1.5rem, 4vw, 3rem));
+  padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
   position: relative;
   overflow: hidden;
 }
@@ -63,7 +63,7 @@
   flex-wrap: wrap;
   gap: 0;
   border-top: 1px solid var(--border);
-  margin-top: clamp(3rem, 5vw, 5rem);
+  margin-top: clamp(2rem, 4vw, 3.5rem);
 }
 
 .heroStat {
@@ -382,7 +382,7 @@
 
 .opsHead {
   max-width: 52rem;
-  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .opsPillars {
@@ -553,7 +553,7 @@
 
 .howHead {
   max-width: 50rem;
-  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .howLayout {
@@ -896,7 +896,7 @@
 
 .featuresHead {
   max-width: 52rem;
-  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .featuresGrid {
@@ -966,7 +966,7 @@
 
 .rolesHead {
   max-width: 52rem;
-  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .rolesGrid {
@@ -1005,7 +1005,7 @@
 
 /* ── CTA ────────────────────────────────────────────── */
 .ctaSection {
-  padding: clamp(5rem, 8vw, 8rem) 0;
+  padding: clamp(3rem, 6vw, 6rem) 0;
 }
 
 .ctaCard {

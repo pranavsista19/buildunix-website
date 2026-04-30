@@ -111,6 +111,7 @@ export default function RootLayout({ children }) {
             <SiteFooter />
           </div>
         </SmoothScrollProvider>
+        <script src="https://api.landinghero.ai/public/assistant-widget.js" data-project-id="mDOm7vPZd4sZ5qup3Z88"></script>
       </body>
     </html>
   );

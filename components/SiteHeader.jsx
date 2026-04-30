@@ -207,6 +207,9 @@ export default function SiteHeader() {
           </nav>
 
           <div className={styles.actions}>
+            <Link href="/contact" className={styles.headerCta}>
+              Book a pilot <span className={styles.headerCtaArrow}>&rarr;</span>
+            </Link>
             <button className={styles.themeToggle} onClick={toggleTheme} aria-label="Toggle theme">
               {theme === "dark" ? (
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -252,6 +255,9 @@ export default function SiteHeader() {
           ))}
         </nav>
         <div className={styles.mobileCtas}>
+          <Link href="/contact" className="button buttonPrimary" onClick={closeMenu}>
+            Book a pilot
+          </Link>
           <button className={styles.mobileThemeToggle} onClick={toggleTheme}>
             {theme === "dark" ? "☀ Light mode" : "☾ Dark mode"}
           </button>

@@ -81,9 +81,6 @@ function HeroSection() {
 
         <div className={styles.heroActions}>
           <div className={styles.heroCta}>
-            <Link href="/contact" className={`button buttonPrimary ${styles.heroBtn}`} onMouseMove={onBtnMove}>
-              Book a pilot
-            </Link>
             <Link href="/product" className={`button buttonGhost ${styles.heroBtn}`} onMouseMove={onBtnMove}>
               See the product
             </Link>
@@ -105,11 +102,6 @@ function HeroSection() {
           </div>
         </div>
       </div>
-
-      <a href="#why" className={styles.scrollHint}>
-        <span>SCROLL</span>
-        <span className={styles.scrollLine} />
-      </a>
     </section>
   );
 }
