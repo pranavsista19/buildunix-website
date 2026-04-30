@@ -14,16 +14,23 @@ export default function BuildunixCommunitySection() {
   const containerRef = useRef(null);
   const sectionRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const isLoadedRef = useRef(false);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isLoaded) {
+        const isVisible = entries[0].isIntersecting;
+        
+        if (isVisible && !isLoadedRef.current) {
+          isLoadedRef.current = true;
           setIsLoaded(true);
-          observer.disconnect();
           initThreeJS();
+        }
+
+        if (containerRef.current) {
+          containerRef.current.dataset.visible = isVisible ? 'true' : 'false';
         }
       },
       { rootMargin: '200px' }
@@ -32,7 +39,7 @@ export default function BuildunixCommunitySection() {
     observer.observe(sectionRef.current);
 
     return () => observer.disconnect();
-  }, [isLoaded]);
+  }, []);
 
   const initThreeJS = () => {
     const container = containerRef.current;
@@ -102,7 +109,7 @@ export default function BuildunixCommunitySection() {
     const raycasterContext = setupRaycaster(container, camera, controls, scene);
     
     // Animation loop
-    const cleanupAnim = startAnimationLoop(renderer, labelRenderer, scene, camera, controls, raycasterContext);
+    const cleanupAnim = startAnimationLoop(renderer, labelRenderer, scene, camera, controls, raycasterContext, container);
 
     // Resize handler
     const onResize = () => {

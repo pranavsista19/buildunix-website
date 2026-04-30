@@ -1,9 +1,14 @@
-export function startAnimationLoop(renderer, labelRenderer, scene, camera, controls, raycasterContext) {
+export function startAnimationLoop(renderer, labelRenderer, scene, camera, controls, raycasterContext, container) {
   let animationFrameId;
 
   const animate = () => {
     animationFrameId = requestAnimationFrame(animate);
     
+    // Pause rendering if container is off-screen
+    if (container && container.dataset.visible === 'false') {
+      return;
+    }
+
     controls.update();
     raycasterContext.update();
 
