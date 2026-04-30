@@ -35,11 +35,9 @@ export const getMaterials = () => {
       color: 0xABC4D1,
       metalness: 0.9,
       roughness: 0.05,
-      transmission: 0.6, // Higher transmission for realism
+      transmission: 0.9, // Use pure transmission for realism
       thickness: 1.5,
-      ior: 1.5, // Index of refraction for glass
-      opacity: 0.4,
-      transparent: true,
+      ior: 1.5,
       envMapIntensity: 2.5,
       side: THREE.DoubleSide,
       depthWrite: false,
@@ -52,9 +50,7 @@ export const getMaterials = () => {
       color: 0x1B3D52,
       roughness: 0.1,
       metalness: 0.3,
-      transmission: 0.2,
-      opacity: 0.9,
-      transparent: true,
+      transmission: 0.8,
       envMapIntensity: 3.0
     }),
     

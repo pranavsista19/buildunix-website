@@ -98,7 +98,8 @@ export function buildCommunity(scene) {
 
   // ─── Towers ────────────────────────────────────────────────────────────────
 
-  BUILDINGS.forEach(b => {
+  const towers = BUILDINGS.filter(b => b.id.startsWith('tower'));
+  towers.forEach(b => {
     // FIX: Provide default dimensions if missing in config
     const w = b.width || (b.id === 'tower_a' ? 14 : (b.id === 'tower_b' ? 12 : 14));
     const d = b.depth || (b.id === 'tower_a' ? 10 : (b.id === 'tower_b' ? 10 : 8));
