@@ -493,6 +493,20 @@ export function buildCommunity(scene) {
 
   const treeCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150;
   
+  const trunkGeo = new THREE.CylinderGeometry(0.2, 0.4, 2, 5);
+  const leavesGeo = new THREE.ConeGeometry(2, 5, 6);
+  
+  const trunkMesh = new THREE.InstancedMesh(trunkGeo, materials.trunk, treeCount);
+  const leavesMesh = new THREE.InstancedMesh(leavesGeo, materials.treeCanopy || materials.leaves, treeCount);
+  
+  // Shadows on 150 trees are very expensive on low-end devices.
+  trunkMesh.castShadow = typeof window !== 'undefined' && window.innerWidth > 1024;
+  leavesMesh.castShadow = typeof window !== 'undefined' && window.innerWidth > 1024;
+  
+  trunkMesh.userData.isDecoration = true;
+  leavesMesh.userData.isDecoration = true;
+
+  const dummy = new THREE.Object3D();
   let placed = 0;
   let attempts = 0;
   
@@ -516,27 +530,34 @@ export function buildCommunity(scene) {
     }
 
     if (!hit) {
-      const tree = new THREE.Group();
-      tree.position.set(tx, 0, tz);
+      const scale = 0.8 + Math.random() * 0.4;
       
-      const trunk = new THREE.Mesh(trunkGeo, materials.facadeDark);
-      trunk.position.y = 0.5;
-      trunk.castShadow = true;
+      // Set trunk matrix
+      dummy.position.set(tx, 1 * scale, tz);
+      dummy.scale.set(scale, scale, scale);
+      dummy.rotation.set(0, Math.random() * Math.PI, 0);
+      dummy.updateMatrix();
+      trunkMesh.setMatrixAt(placed, dummy.matrix);
       
-      const canopy = new THREE.Mesh(treeGeo, materials.treeCanopy);
-      canopy.position.y = 2;
-      canopy.castShadow = true;
-      
-      // Randomize tree scale slightly for realism
-      const s = 0.8 + Math.random() * 0.4;
-      tree.scale.set(s, s, s);
-      
-      tree.add(trunk, canopy);
-      gGroup.add(tree);
+      // Set leaves matrix
+      dummy.position.set(tx, 4 * scale, tz);
+      dummy.updateMatrix();
+      leavesMesh.setMatrixAt(placed, dummy.matrix);
+
       placed++;
     }
   }
 
+  // Update count to actual placed trees to avoid rendering empty instances
+  trunkMesh.count = placed;
+  leavesMesh.count = placed;
+  
+  // Inform WebGL that the matrices need to be updated
+  trunkMesh.instanceMatrix.needsUpdate = true;
+  leavesMesh.instanceMatrix.needsUpdate = true;
+
+  gGroup.add(trunkMesh);
+  gGroup.add(leavesMesh);
   scene.add(gGroup);
 
   // Hidden interaction plane for garden/background

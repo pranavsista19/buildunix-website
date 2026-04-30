@@ -44,7 +44,8 @@ export default function BuildunixCommunitySection() {
       alpha: true,
       powerPreference: 'high-performance'
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const dpr = typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : Math.min(window.devicePixelRatio, 2);
+    renderer.setPixelRatio(dpr);
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.shadowMap.enabled = window.innerWidth >= 768;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -177,32 +178,34 @@ export default function BuildunixCommunitySection() {
       <div className="community-canvas-wrapper">
         <div id="buildunix-community-3d" ref={containerRef}>
           {!isLoaded && <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#B8A89E', fontFamily: 'DM Mono', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em'}}>Loading Interactive Community...</div>}
-        </div>
-        <div className="buildunix-community-tooltip">
-          <div className="tooltip-header">
-            <span className="tooltip-status-dot"></span>
-            <div className="tooltip-building-name"></div>
-            <button className="tooltip-close" title="Close Tooltip">×</button>
+          
+          <div className="buildunix-community-tooltip">
+            <div className="tooltip-header">
+              <span className="tooltip-status-dot"></span>
+              <div className="tooltip-building-name"></div>
+              <button className="tooltip-close" title="Close Tooltip">×</button>
+            </div>
+            <div className="tooltip-meta"></div>
+            <div className="tooltip-hint">Click to pin · Click again to release</div>
           </div>
-          <div className="tooltip-meta"></div>
-          <div className="tooltip-hint">Click to pin · Click again to release</div>
-        </div>
-        <div className="instruction-pane">
-          <div className="instruction-row">
-            <span className="instruction-key">Left Click</span>
-            <span>Rotate View</span>
-          </div>
-          <div className="instruction-row">
-            <span className="instruction-key">Right Click</span>
-            <span>Move Focus (Pan)</span>
-          </div>
-          <div className="instruction-row">
-            <span className="instruction-key">Scroll</span>
-            <span>Zoom In/Out</span>
-          </div>
-          <div className="instruction-row">
-            <span className="instruction-key">Click</span>
-            <span>Select/Pin Info</span>
+          
+          <div className="instruction-pane">
+            <div className="instruction-row">
+              <span className="instruction-key">Left Click</span>
+              <span>Rotate View</span>
+            </div>
+            <div className="instruction-row">
+              <span className="instruction-key">Right Click</span>
+              <span>Move Focus (Pan)</span>
+            </div>
+            <div className="instruction-row">
+              <span className="instruction-key">Scroll</span>
+              <span>Zoom In/Out</span>
+            </div>
+            <div className="instruction-row">
+              <span className="instruction-key">Click</span>
+              <span>Select/Pin Info</span>
+            </div>
           </div>
         </div>
       </div>
