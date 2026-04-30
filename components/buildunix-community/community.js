@@ -95,12 +95,11 @@ export function buildCommunity(scene) {
     createStreetlight(x, -5, Math.PI / 2);
   }
 
-  // --- SPORTS ZONE (Right side, near Block B) ---
-  const sportsX = 46; 
+  // --- AMENITIES (Distributed in corners) ---
 
-  // COURT 1 — BASKETBALL COURT (Near Block B / Top Right)
+  // COURT 1 — BASKETBALL COURT (Behind Tower B - Top Right)
   const basketballGroup = new THREE.Group();
-  basketballGroup.position.set(sportsX, 0, -35);
+  basketballGroup.position.set(42, 0, -35);
 
   const bbBaseGeo = new THREE.PlaneGeometry(28, 15);
   const bbBaseMat = new THREE.MeshStandardMaterial({ color: 0x4A7EC7, roughness: 0.8, metalness: 0.0 });
@@ -108,7 +107,7 @@ export function buildCommunity(scene) {
   bbBase.rotation.x = -Math.PI / 2; bbBase.position.y = 0.12; bbBase.receiveShadow = true;
   bbBase.userData = {
     buildingId: 'basketball_court', buildingName: 'Basketball Court', currentPhase: 14, status: 'complete',
-    description: 'Full-size basketball court with covered bleachers. Phase 14 complete — all QC snags closed.',
+    description: 'Full-size basketball court with covered bleachers. Phase 14 complete.',
     isInteractive: true
   };
   basketballGroup.add(bbBase);
@@ -166,9 +165,9 @@ export function buildCommunity(scene) {
   });
   scene.add(basketballGroup);
 
-  // COURT 2 — FUTSAL COURT (Near Center-Right)
+  // COURT 2 — FUTSAL COURT (Behind Tower A - Top Left)
   const futsalGroup = new THREE.Group();
-  futsalGroup.position.set(sportsX, 0, 0);
+  futsalGroup.position.set(-42, 0, -35);
 
   const fbBaseGeo = new THREE.PlaneGeometry(40, 20);
   const fbBaseMat = new THREE.MeshStandardMaterial({ color: 0x2ECC71, roughness: 1.0, metalness: 0.0 });
@@ -176,7 +175,7 @@ export function buildCommunity(scene) {
   fbBase.rotation.x = -Math.PI / 2; fbBase.position.y = 0.12; fbBase.receiveShadow = true;
   fbBase.userData = {
     buildingId: 'football_court', buildingName: 'Football / Futsal Court', currentPhase: 14, status: 'complete',
-    description: 'Floodlit futsal court with perimeter fencing. Fully handed over. Zero open snags.',
+    description: 'Floodlit futsal court. Phase 14 complete.',
     isInteractive: true
   };
   futsalGroup.add(fbBase);
@@ -228,9 +227,9 @@ export function buildCommunity(scene) {
   });
   scene.add(futsalGroup);
 
-  // COURT 3 — TENNIS COURT (Bottom Right)
+  // COURT 3 — TENNIS COURT (Behind Tower C - Bottom Left)
   const tennisGroup = new THREE.Group();
-  tennisGroup.position.set(sportsX, 0, 35);
+  tennisGroup.position.set(-42, 0, 35);
 
   const woodBase = new THREE.Mesh(new THREE.PlaneGeometry(28, 14), new THREE.MeshStandardMaterial({ color: 0x8B5E3C, roughness: 0.7, metalness: 0.05 }));
   woodBase.rotation.x = -Math.PI / 2; woodBase.position.y = 0.12; woodBase.receiveShadow = true; woodBase.userData.isDecoration = true; tennisGroup.add(woodBase);
@@ -243,7 +242,7 @@ export function buildCommunity(scene) {
   tnSurface.rotation.x = -Math.PI / 2; tnSurface.position.y = 0.13; tnSurface.receiveShadow = true;
   tnSurface.userData = {
     buildingId: 'tennis_court', buildingName: 'Tennis Court', currentPhase: 14, status: 'complete',
-    description: 'Hardcourt tennis surface with timber surround. Amenity QC complete. Ready for handover.',
+    description: 'Hardcourt tennis surface. Phase 14 complete.',
     isInteractive: true
   };
   tennisGroup.add(tnSurface);
@@ -266,20 +265,22 @@ export function buildCommunity(scene) {
   const net = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.91, 10.97), new THREE.MeshStandardMaterial({ color: 0x1A1A1A, opacity: 0.35, transparent: true, wireframe: true })); net.position.y = 0.455; net.userData.isDecoration = true; tennisGroup.add(net);
   scene.add(tennisGroup);
 
-  // Sports Zone Label
-  try {
-    const sportsDiv = document.createElement('div');
-    sportsDiv.className = 'community-label';
-    sportsDiv.innerHTML = `<span class="label-dot status-complete"></span><span class="label-name">Sports & Recreation</span><span class="label-phase">Phase 14/14</span>`;
-    const sportsLabel = new CSS2DObject(sportsDiv);
-    sportsLabel.position.set(sportsX, 6, 0);
-    scene.add(sportsLabel);
-    console.log('Sports label added successfully');
-  } catch (e) {
-    console.error('Failed to add sports label:', e);
-  }
+  // Amenity Labels (Individual for clarity)
+  const createLabel = (name, x, z) => {
+    try {
+      const div = document.createElement('div');
+      div.className = 'community-label';
+      div.innerHTML = `<span class="label-dot status-complete"></span><span class="label-name">${name}</span>`;
+      const label = new CSS2DObject(div);
+      label.position.set(x, 6, z);
+      scene.add(label);
+    } catch (e) { console.error('Label failed:', e); }
+  };
+  createLabel('Basketball', 42, -35);
+  createLabel('Futsal', -42, -35);
+  createLabel('Tennis', -42, 35);
 
-  console.log('Sports zone added: basketball, futsal, tennis courts');
+  console.log('Amenities distributed: basketball, futsal, tennis');
 
   // Helper to create a clean, modern tower (img3 aesthetics)
   const createTower = (bldgObj, width, depth) => {
@@ -479,9 +480,9 @@ export function buildCommunity(scene) {
     {x: -10, z: -18, r: 10}, // Pool
     {x: 0, z: 0, r: 6, isRoad: true, width: 10, length: 110}, // Vertical Road
     {x: 0, z: 0, r: 6, isRoad: true, width: 130, length: 10}, // Horizontal Road
-    {x: 46, z: -35, r: 20}, // New Basketball Court
-    {x: 46, z: 0, r: 24}, // New Futsal Court
-    {x: 46, z: 35, r: 20} // New Tennis Court
+    {x: 42, z: -35, r: 20}, // Basketball Corner
+    {x: -42, z: -35, r: 24}, // Futsal Corner
+    {x: -42, z: 35, r: 20} // Tennis Corner
   ];
 
   const treeCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150;

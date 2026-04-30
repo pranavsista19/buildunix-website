@@ -45,6 +45,17 @@ export function setupRaycaster(container, camera, controls, scene) {
     }
   };
 
+  const closeBtn = document.querySelector('.tooltip-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation(); // Don't trigger the container click
+      lockedObject = null;
+      hoveredObject = null;
+      hideTooltip();
+      controls.autoRotate = true;
+    });
+  }
+
   container.addEventListener('mousemove', onMouseMove, { passive: true });
   container.addEventListener('click', onClick);
 

@@ -80,7 +80,7 @@ export default function BuildunixCommunitySection() {
     controls.enablePan = true;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.minDistance = 30;
+    controls.minDistance = 10;
     controls.maxDistance = 150;
     controls.minPolarAngle = 0;
     controls.maxPolarAngle = Math.PI / 2.1;
@@ -182,6 +182,7 @@ export default function BuildunixCommunitySection() {
           <div className="tooltip-header">
             <span className="tooltip-status-dot"></span>
             <div className="tooltip-building-name"></div>
+            <button className="tooltip-close" title="Close Tooltip">×</button>
           </div>
           <div className="tooltip-meta"></div>
           <div className="tooltip-hint">Click to pin · Click again to release</div>
@@ -193,11 +194,15 @@ export default function BuildunixCommunitySection() {
           </div>
           <div className="instruction-row">
             <span className="instruction-key">Right Click</span>
-            <span>Pan Across</span>
+            <span>Move Focus (Pan)</span>
           </div>
           <div className="instruction-row">
             <span className="instruction-key">Scroll</span>
             <span>Zoom In/Out</span>
+          </div>
+          <div className="instruction-row">
+            <span className="instruction-key">Click</span>
+            <span>Select/Pin Info</span>
           </div>
         </div>
       </div>
