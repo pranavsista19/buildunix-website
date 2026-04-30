@@ -25,11 +25,14 @@ export function showTooltip(data) {
       early_stage: 'Early Stage'
     }[data.status] || data.status;
     
-    const floorPart = data.name.includes('Floor') ? data.name.split(' — ')[1] : '';
+    const parts = data.name.split(' — ');
+    const subtitle = parts.length >= 2 && !parts[1].includes('Floor') ? parts[1] : '';
+    const floorPart = parts.find(p => p.includes('Floor')) || '';
     const phaseString = data.phaseName ? `${data.phaseName} (Phase ${data.currentPhase})` : `Phase ${data.currentPhase} of Template`;
     
     meta.innerHTML = `
-      ${floorPart ? `<div style="margin-bottom: 4px; font-weight: 500;">${floorPart}</div>` : ''}
+      ${subtitle ? `<div style="margin-bottom: 2px; font-weight: 500; opacity: 0.8;">${subtitle}</div>` : ''}
+      ${floorPart ? `<div style="margin-bottom: 6px; font-weight: 700; font-size: 13px;">${floorPart}</div>` : ''}
       <div style="color: ${statusColor}; font-weight: 600;">${phaseString}</div>
       <div style="margin-top: 4px;">Status: ${statusLabel}</div>
     `;
