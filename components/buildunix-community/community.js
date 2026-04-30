@@ -210,11 +210,11 @@ export function buildCommunity(scene) {
   
   // Obstacles: {x, z, radius}
   const obstacles = [
-    {x: -22, z: -8, r: 9}, // Tower A
-    {x: 18, z: -10, r: 8}, // Tower B
-    {x: 12, z: 12, r: 8}, // Tower C
-    {x: -8, z: 10, r: 10}, // Clubhouse
-    {x: 2, z: -8, r: 8}, // Pool
+    {x: -24, z: -18, r: 9}, // Tower A
+    {x: 20, z: -18, r: 8}, // Tower B
+    {x: -24, z: 18, r: 9}, // Tower C
+    {x: 20, z: 18, r: 10}, // Clubhouse
+    {x: -10, z: -18, r: 8}, // Pool
     {x: 0, z: 0, r: 5, isRoad: true, width: 10, length: 100}, // Vertical Road
     {x: -10, z: 0, r: 5, isRoad: true, width: 100, length: 10}, // Horizontal Road 1
     {x: 20, z: 0, r: 5, isRoad: true, width: 100, length: 10} // Horizontal Road 2
