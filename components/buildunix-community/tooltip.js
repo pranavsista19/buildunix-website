@@ -1,39 +1,41 @@
 export function showTooltip(data) {
-  const tooltip = document.querySelector('.buildunix-community-tooltip');
-  if (!tooltip) return;
+  const t = document.querySelector('.buildunix-community-tooltip');
+  if (!t) return;
 
-  const nameEl = tooltip.querySelector('.tooltip-building-name');
-  const metaEl = tooltip.querySelector('.tooltip-meta');
-  const dotEl = tooltip.querySelector('.tooltip-status-dot');
+  const statusColor = {
+    complete: '#1A7A45',
+    in_progress: '#E8690A',
+    early_stage: '#71797E'
+  }[data.status] || '#E8690A';
 
-  if (nameEl) nameEl.textContent = data.name || 'Building';
-  
-  if (dotEl) {
-    const statusColor = data.status === 'complete' ? '#4B6F44' : (data.status === 'in_progress' ? '#E8690A' : '#71797E');
-    dotEl.style.backgroundColor = statusColor;
-    dotEl.style.color = statusColor;
+  const dot = t.querySelector('.tooltip-status-dot');
+  if (dot) {
+    dot.style.backgroundColor = statusColor;
+    dot.style.color = statusColor;
   }
+  
+  const name = t.querySelector('.tooltip-building-name');
+  if (name) name.textContent = data.name;
 
-  let metaHtml = `
-    <div>Units: ${data.units || 'N/A'}</div>
-    <div>Status: ${data.statusLabel || 'Active'}</div>
-  `;
-
-  if (data.type === 'floor') {
-    metaHtml += `
-      <div class="tooltip-floor-info">
-        <span class="tooltip-phase">Floor ${data.floorIndex}: ${data.phase}</span>
-        <div style="font-size: 11px; color: rgba(255,255,255,0.6)">Current heatmap: Active</div>
-      </div>
+  const meta = t.querySelector('.tooltip-meta');
+  if (meta) {
+    const statusLabel = {
+      complete: 'Approved',
+      in_progress: 'In Progress',
+      early_stage: 'Early Stage'
+    }[data.status] || data.status;
+    
+    meta.innerHTML = `
+      <div>${data.name.split(' — ')[0]}</div>
+      <div style="margin-top: 4px; color: ${statusColor}; font-weight: 600;">Phase ${data.currentPhase} of Template</div>
+      <div style="margin-top: 4px;">Status: ${statusLabel}</div>
     `;
   }
 
-  if (metaEl) metaEl.innerHTML = metaHtml;
-  
-  tooltip.classList.add('visible');
+  t.classList.add('visible');
 }
 
 export function hideTooltip() {
-  const tooltip = document.querySelector('.buildunix-community-tooltip');
-  if (tooltip) tooltip.classList.remove('visible');
+  const t = document.querySelector('.buildunix-community-tooltip');
+  if (t) t.classList.remove('visible');
 }

@@ -14,13 +14,19 @@ export function setupRaycaster(container, camera, controls, scene) {
     mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
-    // Update tooltip position (follow mouse)
     const tooltip = document.querySelector('.buildunix-community-tooltip');
-    if (tooltip) {
-      const xOffset = 25;
-      const yOffset = -20;
-      tooltip.style.left = `${e.clientX - rect.left + xOffset}px`;
-      tooltip.style.top = `${e.clientY - rect.top + yOffset}px`;
+    if (tooltip && window.innerWidth >= 768) {
+      const xOffset = 20;
+      const yOffset = 20;
+      
+      let left = e.clientX - rect.left + xOffset;
+      let top = e.clientY - rect.top + yOffset;
+      
+      // Keep tooltip in bounds
+      if (left + 220 > rect.width) left = rect.width - 240;
+      
+      tooltip.style.left = `${left}px`;
+      tooltip.style.top = `${top}px`;
     }
   };
 
@@ -42,56 +48,47 @@ export function setupRaycaster(container, camera, controls, scene) {
   container.addEventListener('mousemove', onMouseMove, { passive: true });
   container.addEventListener('click', onClick);
 
-  function applyHighlight(mesh) {
+  function applyHoverMaterial(mesh) {
+    if (!mesh.material) return;
     mesh.userData._originalMaterial = mesh.material;
     const highlightMat = mesh.material.clone();
-    
-    // Highlight effect
-    if (mesh.userData.type === 'floor') {
-      highlightMat.emissive = new THREE.Color(0xE8690A); // Warm orange highlight for floor
-      highlightMat.emissiveIntensity = 0.4;
-    } else {
-      highlightMat.emissive = new THREE.Color(0xABC4D1); // Soft blue for general buildings
-      highlightMat.emissiveIntensity = 0.2;
-    }
-    
+    highlightMat.emissive = new THREE.Color(0xE8690A);
+    highlightMat.emissiveIntensity = 0.2;
     mesh.material = highlightMat;
   }
 
-  function restoreMaterial(mesh) {
-    if (mesh && mesh.userData._originalMaterial) {
+  function restoreOriginalMaterial(mesh) {
+    if (mesh && mesh.userData && mesh.userData._originalMaterial) {
       mesh.material = mesh.userData._originalMaterial;
       delete mesh.userData._originalMaterial;
     }
   }
 
-  function handleIntersections(intersectedObject) {
-    if (!intersectedObject) {
+  const update = () => {
+    if (lockedObject) return;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(interactiveObjects, false);
+
+    if (intersects.length > 0) {
+      const object = intersects[0].object;
+      if (hoveredObject !== object) {
+        if (hoveredObject) restoreOriginalMaterial(hoveredObject);
+        hoveredObject = object;
+        applyHoverMaterial(hoveredObject);
+        showTooltip(object.userData);
+        controls.autoRotate = false;
+        container.style.cursor = 'pointer';
+      }
+    } else {
       if (hoveredObject) {
-        restoreMaterial(hoveredObject);
+        restoreOriginalMaterial(hoveredObject);
         hoveredObject = null;
         hideTooltip();
         controls.autoRotate = true;
         container.style.cursor = 'default';
       }
-      return;
     }
-
-    if (hoveredObject !== intersectedObject) {
-      if (hoveredObject) restoreMaterial(hoveredObject);
-      hoveredObject = intersectedObject;
-      applyHighlight(intersectedObject);
-      showTooltip(intersectedObject.userData);
-      controls.autoRotate = false;
-      container.style.cursor = 'pointer';
-    }
-  }
-
-  const update = () => {
-    if (lockedObject) return;
-    raycaster.setFromCamera(mouse, camera);
-    const intersects = raycaster.intersectObjects(interactiveObjects, false);
-    handleIntersections(intersects.length > 0 ? intersects[0].object : null);
   };
 
   const cleanup = () => {

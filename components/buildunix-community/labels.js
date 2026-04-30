@@ -4,12 +4,12 @@ export function createBuildingLabel(buildingObj, mesh, totalHeight) {
   const div = document.createElement('div');
   div.className = 'community-label';
   div.innerHTML = `
-    <div class="label-container">
-      <span class="label-name">${buildingObj.name}</span>
-    </div>
+    <span class="label-dot status-${buildingObj.status}"></span>
+    <span class="label-name">${buildingObj.name}</span>
+    <span class="label-phase">Phase ${buildingObj.currentPhase} of Template</span>
   `;
 
   const label = new CSS2DObject(div);
-  label.position.set(0, totalHeight + 1.2, 0);
+  label.position.set(0, totalHeight + 2, 0);
   mesh.add(label);
 }
