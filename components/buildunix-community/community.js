@@ -206,10 +206,10 @@ export function buildCommunity(scene) {
   });
 
   for (let x = -22; x <= 22; x += 2) {
-    [-12, 12].forEach(z => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 4), postMat); p.position.set(x, 2, z); p.userData.isDecoration = true; futsalGroup.add(p); });
+    [-12, 12].forEach(z => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 4), poleMat); p.position.set(x, 2, z); p.userData.isDecoration = true; futsalGroup.add(p); });
   }
   for (let z = -12; z <= 12; z += 2) {
-    [-22, 22].forEach(x => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 4), postMat); p.position.set(x, 2, z); p.userData.isDecoration = true; futsalGroup.add(p); });
+    [-22, 22].forEach(x => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 4), poleMat); p.position.set(x, 2, z); p.userData.isDecoration = true; futsalGroup.add(p); });
   }
 
   const floodPoleGeo = new THREE.CylinderGeometry(0.06, 0.06, 8);
