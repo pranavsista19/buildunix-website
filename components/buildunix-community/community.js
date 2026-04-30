@@ -71,8 +71,35 @@ export function buildCommunity(scene) {
     currentY += floorHeight * 1.2;
 
     for (let i = 0; i < bldgObj.floors; i++) {
-      const isUnderConstruction = bldgObj.status === 'in_progress' && i > bldgObj.floors - 3;
-      const isEarlyStage = bldgObj.status === 'early_stage' && i > bldgObj.floors - 6;
+      const isUnderConstruction = bldgObj.status === 'in_progress' && i >= bldgObj.floors - 3;
+      const isEarlyStage = bldgObj.status === 'early_stage' && i >= bldgObj.floors - 6;
+
+      let phaseName = 'Finishing & Handover';
+      let floorStatus = 'complete';
+      let floorPhaseNum = 8;
+      
+      if (isEarlyStage) {
+        phaseName = 'RCC Framework';
+        floorStatus = 'early_stage';
+        floorPhaseNum = 2;
+      } else if (isUnderConstruction) {
+        phaseName = 'Brickwork & Masonry';
+        floorStatus = 'in_progress';
+        floorPhaseNum = 3;
+      } else if (i >= bldgObj.floors - 6 && bldgObj.status !== 'complete') {
+        phaseName = 'Plastering & MEP';
+        floorStatus = 'in_progress';
+        floorPhaseNum = 5;
+      }
+
+      const floorData = {
+        ...bldgObj,
+        name: `${bldgObj.name} — Floor ${i + 1}`,
+        currentPhase: floorPhaseNum,
+        status: floorStatus,
+        phaseName: phaseName,
+        isInteractive: true
+      };
 
       const floorGroup = new THREE.Group();
       floorGroup.position.y = currentY;
@@ -83,6 +110,7 @@ export function buildCommunity(scene) {
       slab.position.y = 0.075;
       slab.castShadow = true;
       slab.receiveShadow = true;
+      slab.userData = floorData;
       floorGroup.add(slab);
 
       if (isEarlyStage) {
@@ -91,26 +119,31 @@ export function buildCommunity(scene) {
         positions.forEach(([x, z]) => {
           const col = new THREE.Mesh(colGeo, materials.scaffolding);
           col.position.set(x, floorHeight/2, z);
+          col.userData = floorData;
           floorGroup.add(col);
         });
       } else if (isUnderConstruction) {
         const wallGeo = new THREE.BoxGeometry(width - 0.2, floorHeight, depth - 0.2);
         const wall = new THREE.Mesh(wallGeo, materials.concrete);
         wall.position.y = floorHeight/2;
+        wall.userData = floorData;
         floorGroup.add(wall);
       } else {
         // Modern Window block
         const glassGeo = new THREE.BoxGeometry(width - 0.1, floorHeight - 0.15, depth - 0.1);
         const glass = new THREE.Mesh(glassGeo, materials.glass);
         glass.position.y = floorHeight/2;
+        glass.userData = floorData;
         floorGroup.add(glass);
         
         // Warm Wooden accents on corners
         const accentGeo = new THREE.BoxGeometry(1.5, floorHeight - 0.15, 1.5);
         const a1 = new THREE.Mesh(accentGeo, materials.facadeSecondary);
         a1.position.set(-width/2 + 0.75, floorHeight/2, depth/2 - 0.75);
+        a1.userData = floorData;
         const a2 = new THREE.Mesh(accentGeo, materials.facadeSecondary);
         a2.position.set(width/2 - 0.75, floorHeight/2, depth/2 - 0.75);
+        a2.userData = floorData;
         floorGroup.add(a1, a2);
       }
 

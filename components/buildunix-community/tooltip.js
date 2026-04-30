@@ -15,7 +15,7 @@ export function showTooltip(data) {
   }
   
   const name = t.querySelector('.tooltip-building-name');
-  if (name) name.textContent = data.name;
+  if (name) name.textContent = data.name.split(' — ')[0];
 
   const meta = t.querySelector('.tooltip-meta');
   if (meta) {
@@ -25,9 +25,12 @@ export function showTooltip(data) {
       early_stage: 'Early Stage'
     }[data.status] || data.status;
     
+    const floorPart = data.name.includes('Floor') ? data.name.split(' — ')[1] : '';
+    const phaseString = data.phaseName ? `${data.phaseName} (Phase ${data.currentPhase})` : `Phase ${data.currentPhase} of Template`;
+    
     meta.innerHTML = `
-      <div>${data.name.split(' — ')[0]}</div>
-      <div style="margin-top: 4px; color: ${statusColor}; font-weight: 600;">Phase ${data.currentPhase} of Template</div>
+      ${floorPart ? `<div style="margin-bottom: 4px; font-weight: 500;">${floorPart}</div>` : ''}
+      <div style="color: ${statusColor}; font-weight: 600;">${phaseString}</div>
       <div style="margin-top: 4px;">Status: ${statusLabel}</div>
     `;
   }
