@@ -10,6 +10,8 @@ export function setupRaycaster(container, camera, controls, scene) {
   let lockedObject = null;
 
   const onMouseMove = (e) => {
+    if (lockedObject) return; // Stop tooltip from running away from mouse when pinned
+    
     const rect = container.getBoundingClientRect();
     mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;

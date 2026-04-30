@@ -61,7 +61,7 @@ export const BUILDINGS = [
     id: 'pool',
     name: 'Swimming Pool & Deck',
     type: 'pool',
-    x: -10,
+    x: -14,
     y: 0.05,
     z: -18,
     currentPhase: 8,

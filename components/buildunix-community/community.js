@@ -165,17 +165,17 @@ export function buildCommunity(scene) {
   });
   scene.add(basketballGroup);
 
-  // COURT 2 — FUTSAL COURT (Behind Tower A - Top Left)
+  // COURT 2 — FOOTBALL COURT (Behind Tower A - Top Left)
   const futsalGroup = new THREE.Group();
-  futsalGroup.position.set(-42, 0, -35);
+  futsalGroup.position.set(-35, 0, -35);
 
   const fbBaseGeo = new THREE.PlaneGeometry(40, 20);
   const fbBaseMat = new THREE.MeshStandardMaterial({ color: 0x2ECC71, roughness: 1.0, metalness: 0.0 });
   const fbBase = new THREE.Mesh(fbBaseGeo, fbBaseMat);
   fbBase.rotation.x = -Math.PI / 2; fbBase.position.y = 0.12; fbBase.receiveShadow = true;
   fbBase.userData = {
-    buildingId: 'football_court', buildingName: 'Football / Futsal Court', currentPhase: 14, status: 'complete',
-    description: 'Floodlit futsal court. Phase 14 complete.',
+    buildingId: 'football_court', buildingName: 'Football Court', currentPhase: 14, status: 'complete',
+    description: 'Floodlit football court. Phase 14 complete.',
     isInteractive: true
   };
   futsalGroup.add(fbBase);
@@ -268,19 +268,25 @@ export function buildCommunity(scene) {
   // Amenity Labels (Individual for clarity)
   const createLabel = (name, x, z) => {
     try {
+      const poleHeight = 4;
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, poleHeight), materials.facadeDark);
+      pole.position.set(x, poleHeight / 2, z);
+      pole.castShadow = true;
+      scene.add(pole);
+
       const div = document.createElement('div');
       div.className = 'community-label';
       div.innerHTML = `<span class="label-dot status-complete"></span><span class="label-name">${name}</span>`;
       const label = new CSS2DObject(div);
-      label.position.set(x, 6, z);
+      label.position.set(x, poleHeight + 0.4, z); // Sit on top of the pole
       scene.add(label);
     } catch (e) { console.error('Label failed:', e); }
   };
   createLabel('Basketball', 42, -35);
-  createLabel('Futsal', -42, -35);
+  createLabel('Football', -35, -35);
   createLabel('Tennis', -42, 35);
 
-  console.log('Amenities distributed: basketball, futsal, tennis');
+  console.log('Amenities distributed: basketball, football, tennis');
 
   // Helper to create a clean, modern tower (img3 aesthetics)
   const createTower = (bldgObj, width, depth) => {
@@ -477,11 +483,11 @@ export function buildCommunity(scene) {
     {x: 20, z: -18, r: 10}, // Tower B
     {x: -24, z: 18, r: 10}, // Tower C
     {x: 20, z: 18, r: 12}, // Clubhouse
-    {x: -10, z: -18, r: 10}, // Pool
+    {x: -14, z: -18, r: 10}, // Pool
     {x: 0, z: 0, r: 6, isRoad: true, width: 10, length: 110}, // Vertical Road
     {x: 0, z: 0, r: 6, isRoad: true, width: 130, length: 10}, // Horizontal Road
     {x: 42, z: -35, r: 20}, // Basketball Corner
-    {x: -42, z: -35, r: 24}, // Futsal Corner
+    {x: -35, z: -35, r: 24}, // Football Corner
     {x: -42, z: 35, r: 20} // Tennis Corner
   ];
 

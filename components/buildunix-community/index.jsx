@@ -81,7 +81,7 @@ export default function BuildunixCommunitySection() {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.minDistance = 10;
-    controls.maxDistance = 150;
+    controls.maxDistance = 250;
     controls.minPolarAngle = 0;
     controls.maxPolarAngle = Math.PI / 2.1;
     controls.autoRotate = true;
