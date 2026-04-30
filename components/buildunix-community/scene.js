@@ -4,53 +4,54 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 export function setupScene(container, renderer) {
   const scene = new THREE.Scene();
 
-  // PMREM Generator for realistic reflections
+  // Robust Environment Setup
   const pmremGenerator = new THREE.PMREMGenerator(renderer);
-  const environment = pmremGenerator.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+  pmremGenerator.compileEquirectangularShader();
+  
+  const roomEnv = new RoomEnvironment(renderer);
+  const environment = pmremGenerator.fromScene(roomEnv, 0.04).texture;
   scene.environment = environment;
   
-  // Transparent background for CSS-driven themes
-  scene.background = null;
-  renderer.setClearColor(0x000000, 0);
+  // Dispose generator and roomEnv to save memory
+  pmremGenerator.dispose();
+  roomEnv.dispose();
+  
+  // Set a dark architectural background instead of pure transparency to avoid "nothing visible" issues
+  scene.background = new THREE.Color(0x0a0a0b); 
+  renderer.setClearColor(0x0a0a0b, 1);
 
-  // 1. Hemisphere Light: Sky/Ground contrast (Cool/Warm)
-  const hemiLight = new THREE.HemisphereLight(0x87CEEB, 0x2A241F, 0.4); 
+  // 1. Hemisphere Light (Atmospheric Fill)
+  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2); 
   scene.add(hemiLight);
 
-  // 2. Primary Sun Light: Warm, strong, high-contrast (Reference Image 1)
-  const sunLight = new THREE.DirectionalLight(0xFFF4E0, 3.5); 
-  sunLight.position.set(40, 60, 25);
+  // 2. Strong Architectural Sun (High Intensity for MeshPhysicalMaterial)
+  const sunLight = new THREE.DirectionalLight(0xFFF4E0, 4.0); 
+  sunLight.position.set(50, 70, 30);
   sunLight.castShadow = true;
   
-  // High quality shadows
   sunLight.shadow.mapSize.width = 2048;
   sunLight.shadow.mapSize.height = 2048;
   sunLight.shadow.camera.near = 1;
   sunLight.shadow.camera.far = 300;
-  sunLight.shadow.camera.left = -60;
-  sunLight.shadow.camera.right = 60;
-  sunLight.shadow.camera.top = 60;
-  sunLight.shadow.camera.bottom = -60;
-  sunLight.shadow.bias = -0.0005;
-  sunLight.shadow.blurSamples = 8;
+  sunLight.shadow.camera.left = -100;
+  sunLight.shadow.camera.right = 100;
+  sunLight.shadow.camera.top = 100;
+  sunLight.shadow.camera.bottom = -100;
+  sunLight.shadow.bias = -0.0001;
   scene.add(sunLight);
 
-  // 3. Fill Light: Cool blue to bounce into shadows
-  const fillLight = new THREE.DirectionalLight(0x87CEEB, 0.6);
-  fillLight.position.set(-30, 20, -20);
-  scene.add(fillLight);
+  // 3. Fill Lights (Shadow Softening)
+  const fill1 = new THREE.DirectionalLight(0xABC4D1, 0.8);
+  fill1.position.set(-50, 30, -20);
+  scene.add(fill1);
 
-  // 4. Ambient Occlusion / Soft Ground Fill
-  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.2);
-  scene.add(ambientLight);
-
-  // 5. Point Lights for localized glow (Pool & Accents)
-  const poolLight = new THREE.PointLight(0x4a9aba, 2.5, 30);
+  // 4. Localized Accents
+  const poolLight = new THREE.PointLight(0x4a9aba, 3, 40);
   poolLight.position.set(2, 4, -8);
   scene.add(poolLight);
 
-  const accentLight = new THREE.PointLight(0xE8690A, 1.2, 40);
-  accentLight.position.set(-22, 10, -8);
+  const accentLight = new THREE.PointLight(0xE8690A, 1.5, 50);
+  accentLight.position.set(-22, 12, -8);
   scene.add(accentLight);
   scene.userData.accentLight = accentLight;
 
