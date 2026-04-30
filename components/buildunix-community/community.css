@@ -1,3 +1,77 @@
+.buildunix-community-section {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+  height: 100vh;
+  min-height: 700px;
+  background: var(--color-bg, #F0EDE8);
+  padding: 0 6%;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  .buildunix-community-section {
+    background: var(--color-bg, #0F0D0B);
+  }
+}
+
+.community-intro {
+  flex-shrink: 0;
+  width: 280px;
+  z-index: 5;
+}
+
+.community-intro .eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.community-intro h2 {
+  font-family: var(--ff-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--color-text, #111111);
+  line-height: 1.05;
+  margin: 10px 0 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .community-intro h2 { color: var(--color-text, #F0EDE8); }
+}
+
+.community-intro p {
+  font-family: 'Epilogue', sans-serif;
+  font-size: 14px;
+  color: var(--color-text-dim, #666666);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .community-intro p { color: var(--color-text-dim, #B8A89E); }
+}
+
+.community-canvas-wrapper {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+#buildunix-community-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+#buildunix-community-3d canvas {
+  display: block;
+}
+
 /* Liquid Glass Tooltip Design */
 .buildunix-community-tooltip {
   position: absolute;
@@ -128,3 +202,37 @@
   white-space: nowrap;
 }
 
+@media (max-width: 768px) {
+  .buildunix-community-section {
+    flex-direction: column;
+    padding: 60px 4%;
+    height: auto;
+    min-height: auto;
+  }
+  .community-intro {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .community-legend {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .community-canvas-wrapper {
+    width: 100%;
+    height: 60vh;
+  }
+  .buildunix-community-tooltip {
+    bottom: 24px;
+    top: auto;
+    right: 50%;
+    transform: translateX(50%) translateY(16px);
+    width: calc(100% - 48px);
+    max-width: 400px;
+  }
+  .buildunix-community-tooltip.visible {
+    transform: translateX(50%) translateY(0);
+  }
+}
