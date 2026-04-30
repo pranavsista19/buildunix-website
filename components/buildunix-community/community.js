@@ -95,18 +95,17 @@ export function buildCommunity(scene) {
     createStreetlight(x, -5, Math.PI / 2);
   }
 
-  // --- SPORTS ZONE (Row along X at z=38) ---
-  const sportsZoneX = -44; 
-  const sportsZoneZ = 38;
+  // --- SPORTS ZONE (Right side, near Block B) ---
+  const sportsX = 46; 
 
-  // COURT 1 — BASKETBALL COURT
+  // COURT 1 — BASKETBALL COURT (Near Block B / Top Right)
   const basketballGroup = new THREE.Group();
-  basketballGroup.position.set(sportsZoneX, 0, sportsZoneZ);
+  basketballGroup.position.set(sportsX, 0, -35);
 
   const bbBaseGeo = new THREE.PlaneGeometry(28, 15);
   const bbBaseMat = new THREE.MeshStandardMaterial({ color: 0x4A7EC7, roughness: 0.8, metalness: 0.0 });
   const bbBase = new THREE.Mesh(bbBaseGeo, bbBaseMat);
-  bbBase.rotation.x = -Math.PI / 2; bbBase.position.y = 0.02; bbBase.receiveShadow = true;
+  bbBase.rotation.x = -Math.PI / 2; bbBase.position.y = 0.12; bbBase.receiveShadow = true;
   bbBase.userData = {
     buildingId: 'basketball_court', buildingName: 'Basketball Court', currentPhase: 14, status: 'complete',
     description: 'Full-size basketball court with covered bleachers. Phase 14 complete — all QC snags closed.',
@@ -115,33 +114,33 @@ export function buildCommunity(scene) {
   basketballGroup.add(bbBase);
 
   const bbRunoff = new THREE.Mesh(new THREE.PlaneGeometry(32, 19), new THREE.MeshStandardMaterial({ color: 0x5A8ED4, roughness: 0.9 }));
-  bbRunoff.rotation.x = -Math.PI / 2; bbRunoff.position.y = 0.01; bbRunoff.receiveShadow = true; bbRunoff.userData.isDecoration = true;
+  bbRunoff.rotation.x = -Math.PI / 2; bbRunoff.position.y = 0.11; bbRunoff.receiveShadow = true; bbRunoff.userData.isDecoration = true;
   basketballGroup.add(bbRunoff);
 
   const keyMat = new THREE.MeshStandardMaterial({ color: 0xC0392B, roughness: 0.8 });
   [-11.1, 11.1].forEach(x => {
-    const key = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.01, 4.9), keyMat); key.position.set(x, 0.015, 0); key.userData.isDecoration = true;
+    const key = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.02, 4.9), keyMat); key.position.set(x, 0.125, 0); key.userData.isDecoration = true;
     basketballGroup.add(key);
   });
 
   const lineMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: 0.5 });
   const bbLines = [
-    { g: [28, 0.01, 0.08], p: [0, 0.025, 7.46] }, { g: [28, 0.01, 0.08], p: [0, 0.025, -7.46] },
-    { g: [0.08, 0.01, 15], p: [14, 0.025, 0] }, { g: [0.08, 0.01, 15], p: [-14, 0.025, 0] },
-    { g: [0.08, 0.01, 15], p: [0, 0.025, 0] }
+    { g: [28, 0.02, 0.08], p: [0, 0.13, 7.46] }, { g: [28, 0.02, 0.08], p: [0, 0.13, -7.46] },
+    { g: [0.08, 0.02, 15], p: [14, 0.13, 0] }, { g: [0.08, 0.02, 15], p: [-14, 0.13, 0] },
+    { g: [0.08, 0.02, 15], p: [0, 0.13, 0] }
   ];
   bbLines.forEach(l => {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(...l.g), lineMat); mesh.position.set(...l.p); mesh.userData.isDecoration = true; basketballGroup.add(mesh);
   });
 
   const cCircle = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.05, 8, 32), lineMat);
-  cCircle.rotation.x = -Math.PI / 2; cCircle.position.y = 0.025; cCircle.userData.isDecoration = true; basketballGroup.add(cCircle);
+  cCircle.rotation.x = -Math.PI / 2; cCircle.position.y = 0.13; cCircle.userData.isDecoration = true; basketballGroup.add(cCircle);
 
   [-8.325, 8.325].forEach(x => {
     const ftc = new THREE.Mesh(new THREE.TorusGeometry(1.8, 0.05, 8, 16), lineMat);
-    ftc.rotation.x = -Math.PI / 2; ftc.position.set(x, 0.025, 0); ftc.userData.isDecoration = true; basketballGroup.add(ftc);
+    ftc.rotation.x = -Math.PI / 2; ftc.position.set(x, 0.13, 0); ftc.userData.isDecoration = true; basketballGroup.add(ftc);
     [-2.45, 2.45].forEach(z => {
-      const ftl = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.01, 0.08), lineMat); ftl.position.set(x, 0.025, z); ftl.userData.isDecoration = true; basketballGroup.add(ftl);
+      const ftl = new THREE.Mesh(new THREE.BoxGeometry(5.8, 0.02, 0.08), lineMat); ftl.position.set(x, 0.13, z); ftl.userData.isDecoration = true; basketballGroup.add(ftl);
     });
   });
 
@@ -167,14 +166,14 @@ export function buildCommunity(scene) {
   });
   scene.add(basketballGroup);
 
-  // COURT 2 — FUTSAL COURT
+  // COURT 2 — FUTSAL COURT (Near Center-Right)
   const futsalGroup = new THREE.Group();
-  futsalGroup.position.set(sportsZoneX + 36, 0, sportsZoneZ);
+  futsalGroup.position.set(sportsX, 0, 0);
 
   const fbBaseGeo = new THREE.PlaneGeometry(40, 20);
   const fbBaseMat = new THREE.MeshStandardMaterial({ color: 0x2ECC71, roughness: 1.0, metalness: 0.0 });
   const fbBase = new THREE.Mesh(fbBaseGeo, fbBaseMat);
-  fbBase.rotation.x = -Math.PI / 2; fbBase.position.y = 0.02; fbBase.receiveShadow = true;
+  fbBase.rotation.x = -Math.PI / 2; fbBase.position.y = 0.12; fbBase.receiveShadow = true;
   fbBase.userData = {
     buildingId: 'football_court', buildingName: 'Football / Futsal Court', currentPhase: 14, status: 'complete',
     description: 'Floodlit futsal court with perimeter fencing. Fully handed over. Zero open snags.',
@@ -183,26 +182,26 @@ export function buildCommunity(scene) {
   futsalGroup.add(fbBase);
 
   const fbRunoff = new THREE.Mesh(new THREE.PlaneGeometry(44, 24), new THREE.MeshStandardMaterial({ color: 0xE74C3C }));
-  fbRunoff.rotation.x = -Math.PI / 2; fbRunoff.position.y = 0.01; fbRunoff.receiveShadow = true; fbRunoff.userData.isDecoration = true;
+  fbRunoff.rotation.x = -Math.PI / 2; fbRunoff.position.y = 0.11; fbRunoff.receiveShadow = true; fbRunoff.userData.isDecoration = true;
   futsalGroup.add(fbRunoff);
 
   const fbLines = [
-    { g: [40, 0.01, 0.07], p: [0, 0.025, 10] }, { g: [40, 0.01, 0.07], p: [0, 0.025, -10] },
-    { g: [0.07, 0.01, 20], p: [20, 0.025, 0] }, { g: [0.07, 0.01, 20], p: [-20, 0.025, 0] },
-    { g: [0.07, 0.01, 20], p: [0, 0.025, 0] }
+    { g: [40, 0.02, 0.07], p: [0, 0.13, 10] }, { g: [40, 0.02, 0.07], p: [0, 0.13, -10] },
+    { g: [0.07, 0.02, 20], p: [20, 0.13, 0] }, { g: [0.07, 0.02, 20], p: [-20, 0.13, 0] },
+    { g: [0.07, 0.02, 20], p: [0, 0.13, 0] }
   ];
   fbLines.forEach(l => {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(...l.g), lineMat); mesh.position.set(...l.p); mesh.userData.isDecoration = true; futsalGroup.add(mesh);
   });
 
-  const fbCircle = new THREE.Mesh(new THREE.TorusGeometry(3, 0.06, 8, 32), lineMat); fbCircle.rotation.x = -Math.PI / 2; fbCircle.position.y = 0.025; fbCircle.userData.isDecoration = true; futsalGroup.add(fbCircle);
+  const fbCircle = new THREE.Mesh(new THREE.TorusGeometry(3, 0.06, 8, 32), lineMat); fbCircle.rotation.x = -Math.PI / 2; fbCircle.position.y = 0.13; fbCircle.userData.isDecoration = true; futsalGroup.add(fbCircle);
   [-15, 15].forEach(x => {
-    const g1 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.01, 5), lineMat); g1.position.set(x, 0.025, 0); g1.userData.isDecoration = true; futsalGroup.add(g1);
-    const g2 = new THREE.Mesh(new THREE.BoxGeometry(5, 0.01, 0.07), lineMat); g2.position.set(x>0?x-2.5:x+2.5, 0.025, 2.5); g2.userData.isDecoration = true; futsalGroup.add(g2);
-    const g3 = new THREE.Mesh(new THREE.BoxGeometry(5, 0.01, 0.07), lineMat); g3.position.set(x>0?x-2.5:x+2.5, 0.025, -2.5); g3.userData.isDecoration = true; futsalGroup.add(g3);
+    const g1 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.02, 5), lineMat); g1.position.set(x, 0.13, 0); g1.userData.isDecoration = true; futsalGroup.add(g1);
+    const g2 = new THREE.Mesh(new THREE.BoxGeometry(5, 0.02, 0.07), lineMat); g2.position.set(x>0?x-2.5:x+2.5, 0.13, 2.5); g2.userData.isDecoration = true; futsalGroup.add(g2);
+    const g3 = new THREE.Mesh(new THREE.BoxGeometry(5, 0.02, 0.07), lineMat); g3.position.set(x>0?x-2.5:x+2.5, 0.13, -2.5); g3.userData.isDecoration = true; futsalGroup.add(g3);
   });
   [-12, 12].forEach(x => {
-    const spot = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 4), lineMat); spot.scale.y = 0.05; spot.position.set(x, 0.025, 0); spot.userData.isDecoration = true; futsalGroup.add(spot);
+    const spot = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 4), lineMat); spot.scale.y = 0.05; spot.position.set(x, 0.13, 0); spot.userData.isDecoration = true; futsalGroup.add(spot);
   });
 
   for (let x = -22; x <= 22; x += 2) {
@@ -221,7 +220,7 @@ export function buildCommunity(scene) {
   });
 
   // Goals
-  const netMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, opacity: 0.12, transparent: true, wireframe: true });
+  const netMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, opacity: 0.15, transparent: true, wireframe: true });
   [-20, 20].forEach(x => {
     [-1.5, 1.5].forEach(z => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2), lineMat); p.position.set(x, 1, z); p.userData.isDecoration = true; futsalGroup.add(p); });
     const c = new THREE.Mesh(new THREE.BoxGeometry(3, 0.05, 0.05), lineMat); c.position.set(x, 2, 0); c.rotation.y = Math.PI/2; c.userData.isDecoration = true; futsalGroup.add(c);
@@ -229,19 +228,19 @@ export function buildCommunity(scene) {
   });
   scene.add(futsalGroup);
 
-  // COURT 3 — TENNIS COURT
+  // COURT 3 — TENNIS COURT (Bottom Right)
   const tennisGroup = new THREE.Group();
-  tennisGroup.position.set(sportsZoneX + 72, 0, sportsZoneZ);
+  tennisGroup.position.set(sportsX, 0, 35);
 
   const woodBase = new THREE.Mesh(new THREE.PlaneGeometry(28, 14), new THREE.MeshStandardMaterial({ color: 0x8B5E3C, roughness: 0.7, metalness: 0.05 }));
-  woodBase.rotation.x = -Math.PI / 2; woodBase.position.y = 0.02; woodBase.receiveShadow = true; woodBase.userData.isDecoration = true; tennisGroup.add(woodBase);
+  woodBase.rotation.x = -Math.PI / 2; woodBase.position.y = 0.12; woodBase.receiveShadow = true; woodBase.userData.isDecoration = true; tennisGroup.add(woodBase);
   const grainMat = new THREE.MeshStandardMaterial({ color: 0x6B4423, opacity: 0.4, transparent: true });
   for (let z = -6; z <= 6; z += 2.4) {
-    const g = new THREE.Mesh(new THREE.BoxGeometry(28, 0.005, 0.015), grainMat); g.position.set(0, 0.025, z); g.userData.isDecoration = true; tennisGroup.add(g);
+    const g = new THREE.Mesh(new THREE.BoxGeometry(28, 0.01, 0.015), grainMat); g.position.set(0, 0.125, z); g.userData.isDecoration = true; tennisGroup.add(g);
   }
 
   const tnSurface = new THREE.Mesh(new THREE.PlaneGeometry(23.77, 10.97), new THREE.MeshStandardMaterial({ color: 0x1B7A2E, roughness: 0.85 }));
-  tnSurface.rotation.x = -Math.PI / 2; tnSurface.position.y = 0.03; tnSurface.receiveShadow = true;
+  tnSurface.rotation.x = -Math.PI / 2; tnSurface.position.y = 0.13; tnSurface.receiveShadow = true;
   tnSurface.userData = {
     buildingId: 'tennis_court', buildingName: 'Tennis Court', currentPhase: 14, status: 'complete',
     description: 'Hardcourt tennis surface with timber surround. Amenity QC complete. Ready for handover.',
@@ -250,13 +249,13 @@ export function buildCommunity(scene) {
   tennisGroup.add(tnSurface);
 
   const tnLines = [
-    { g: [23.77, 0.005, 0.05], p: [0, 0.035, 5.485] }, { g: [23.77, 0.005, 0.05], p: [0, 0.035, -5.485] },
-    { g: [23.77, 0.005, 0.05], p: [0, 0.035, 4.115] }, { g: [23.77, 0.005, 0.05], p: [0, 0.035, -4.115] },
-    { g: [0.05, 0.005, 10.97], p: [11.885, 0.035, 0] }, { g: [0.05, 0.005, 10.97], p: [-11.885, 0.035, 0] },
-    { g: [6.4, 0.005, 0.05], p: [3.2, 0.035, 3.2] }, { g: [6.4, 0.005, 0.05], p: [-3.2, 0.035, 3.2] },
-    { g: [6.4, 0.005, 0.05], p: [3.2, 0.035, -3.2] }, { g: [6.4, 0.005, 0.05], p: [-3.2, 0.035, -3.2] },
-    { g: [0.05, 0.005, 6.4], p: [0, 0.035, 0] },
-    { g: [0.05, 0.005, 0.2], p: [11.885, 0.035, 0] }, { g: [0.05, 0.005, 0.2], p: [-11.885, 0.035, 0] }
+    { g: [23.77, 0.01, 0.05], p: [0, 0.135, 5.485] }, { g: [23.77, 0.01, 0.05], p: [0, 0.135, -5.485] },
+    { g: [23.77, 0.01, 0.05], p: [0, 0.135, 4.115] }, { g: [23.77, 0.01, 0.05], p: [0, 0.135, -4.115] },
+    { g: [0.05, 0.01, 10.97], p: [11.885, 0.135, 0] }, { g: [0.05, 0.01, 10.97], p: [-11.885, 0.135, 0] },
+    { g: [6.4, 0.01, 0.05], p: [3.2, 0.135, 3.2] }, { g: [6.4, 0.01, 0.05], p: [-3.2, 0.135, 3.2] },
+    { g: [6.4, 0.01, 0.05], p: [3.2, 0.135, -3.2] }, { g: [6.4, 0.01, 0.05], p: [-3.2, 0.135, -3.2] },
+    { g: [0.05, 0.01, 6.4], p: [0, 0.135, 0] },
+    { g: [0.05, 0.01, 0.2], p: [11.885, 0.135, 0] }, { g: [0.05, 0.01, 0.2], p: [-11.885, 0.135, 0] }
   ];
   tnLines.forEach(l => {
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(...l.g), lineMat); mesh.position.set(...l.p); mesh.userData.isDecoration = true; tennisGroup.add(mesh);
@@ -273,7 +272,7 @@ export function buildCommunity(scene) {
     sportsDiv.className = 'community-label';
     sportsDiv.innerHTML = `<span class="label-dot status-complete"></span><span class="label-name">Sports & Recreation</span><span class="label-phase">Phase 14/14</span>`;
     const sportsLabel = new CSS2DObject(sportsDiv);
-    sportsLabel.position.set(sportsZoneX + 36, 6, sportsZoneZ);
+    sportsLabel.position.set(sportsX, 6, 0);
     scene.add(sportsLabel);
     console.log('Sports label added successfully');
   } catch (e) {
@@ -480,10 +479,9 @@ export function buildCommunity(scene) {
     {x: -10, z: -18, r: 10}, // Pool
     {x: 0, z: 0, r: 6, isRoad: true, width: 10, length: 110}, // Vertical Road
     {x: 0, z: 0, r: 6, isRoad: true, width: 130, length: 10}, // Horizontal Road
-    {x: 45, z: 25, r: 18}, // Basketball
-    {x: 45, z: -25, r: 25}, // Football
-    {x: -45, z: 25, r: 18}, // Tennis
-    {x: -45, z: -28, r: 15} // Badminton
+    {x: 46, z: -35, r: 20}, // New Basketball Court
+    {x: 46, z: 0, r: 24}, // New Futsal Court
+    {x: 46, z: 35, r: 20} // New Tennis Court
   ];
 
   const treeCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150;

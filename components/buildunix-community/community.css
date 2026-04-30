@@ -83,7 +83,44 @@
 
 .legend-dot.complete { background: #1A7A45; }
 .legend-dot.in_progress { background: #A06B0A; }
-.legend-dot.early_stage { background: #888888; }
+.legend-dot.early_stage { background: #7F8C8D; box-shadow: 0 0 8px rgba(127, 140, 141, 0.4); }
+
+.instruction-pane {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.instruction-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #1A1A1A;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.instruction-key {
+  background: #1A1A1A;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+  font-weight: 500;
+}
 
 .community-canvas-wrapper {
   flex: 1;

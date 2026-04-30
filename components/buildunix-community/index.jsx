@@ -77,7 +77,7 @@ export default function BuildunixCommunitySection() {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 5, 0);
-    controls.enablePan = false;
+    controls.enablePan = true;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.minDistance = 30;
@@ -185,6 +185,20 @@ export default function BuildunixCommunitySection() {
           </div>
           <div className="tooltip-meta"></div>
           <div className="tooltip-hint">Click to pin · Click again to release</div>
+        </div>
+        <div className="instruction-pane">
+          <div className="instruction-row">
+            <span className="instruction-key">Left Click</span>
+            <span>Rotate View</span>
+          </div>
+          <div className="instruction-row">
+            <span className="instruction-key">Right Click</span>
+            <span>Pan Across</span>
+          </div>
+          <div className="instruction-row">
+            <span className="instruction-key">Scroll</span>
+            <span>Zoom In/Out</span>
+          </div>
         </div>
       </div>
     </section>
