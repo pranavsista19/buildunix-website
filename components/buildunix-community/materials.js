@@ -14,13 +14,13 @@ export const getMaterials = () => {
       roughness: 0.8,
       metalness: 0.1
     }),
-    // Dark clean glass
+    // Refined glass for better reflections
     glass: new THREE.MeshStandardMaterial({
       color: 0x1A252C,
-      roughness: 0.15,
-      metalness: 0.7,
+      roughness: 0.05,
+      metalness: 0.9,
       transparent: true,
-      opacity: 0.85
+      opacity: 0.7
     }),
     // Dark metal/roof accents
     facadeDark: new THREE.MeshStandardMaterial({
@@ -73,6 +73,12 @@ export const getMaterials = () => {
       color: 0xFFFFFF, // White dashes
       transparent: true,
       opacity: 0.8
-    })
+    }),
+    // Sports Court Materials
+    courtGreen: new THREE.MeshStandardMaterial({ color: 0x4CAF50, roughness: 0.8 }),
+    courtBlue: new THREE.MeshStandardMaterial({ color: 0x2196F3, roughness: 0.8 }),
+    courtRed: new THREE.MeshStandardMaterial({ color: 0xF44336, roughness: 0.8 }),
+    courtBorder: new THREE.MeshBasicMaterial({ color: 0xFFFFFF }),
+    streetLight: new THREE.MeshStandardMaterial({ color: 0xCCCCCC, metalness: 0.8, roughness: 0.2 })
   };
 };

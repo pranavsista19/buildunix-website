@@ -47,10 +47,92 @@ export function buildCommunity(scene) {
     scene.add(roadGroup);
   };
 
-  // Main Roads
-  createRoad(8, 90, 0, 0, 0); // Vertical spine
-  createRoad(8, 60, -10, 0, Math.PI / 2); // Horizontal cross
-  createRoad(8, 60, 20, 0, Math.PI / 2); // Horizontal cross
+  // Main Roads - Extended to plot ends (120x100)
+  createRoad(8, 100, 0, 0, 0); // Vertical spine (covers full z=-50 to 50)
+  createRoad(8, 120, 0, 0, Math.PI / 2); // Horizontal cross (covers full x=-60 to 60)
+
+  // Helper for Streetlights
+  const createStreetlight = (x, z, rotY = 0) => {
+    const lightGroup = new THREE.Group();
+    lightGroup.position.set(x, 0, z);
+    lightGroup.rotation.y = rotY;
+
+    // Pole
+    const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.15, 6), materials.streetLight);
+    pole.position.y = 3;
+    pole.castShadow = true;
+    lightGroup.add(pole);
+
+    // Arm
+    const arm = new THREE.Mesh(new THREE.BoxGeometry(2, 0.2, 0.2), materials.streetLight);
+    arm.position.set(0.8, 6, 0);
+    lightGroup.add(arm);
+
+    // Light head
+    const head = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 0.6), materials.facadeDark);
+    head.position.set(1.6, 6, 0);
+    lightGroup.add(head);
+
+    // Point light (subtle)
+    const pLight = new THREE.PointLight(0xFFFFFF, 0.5, 10);
+    pLight.position.set(1.6, 5.8, 0);
+    lightGroup.add(pLight);
+
+    scene.add(lightGroup);
+  };
+
+  // Place streetlights along the roads
+  for (let z = -45; z <= 45; z += 15) {
+    if (Math.abs(z) < 8) continue; // Skip intersection
+    createStreetlight(5, z, 0);
+    createStreetlight(-5, z, Math.PI);
+  }
+  for (let x = -55; x <= 55; x += 15) {
+    if (Math.abs(x) < 8) continue; // Skip intersection
+    createStreetlight(x, 5, -Math.PI / 2);
+    createStreetlight(x, -5, Math.PI / 2);
+  }
+
+  // Helper for Sports Courts
+  const createSportsCourt = (type, x, z, width, length) => {
+    const courtGroup = new THREE.Group();
+    courtGroup.position.set(x, 0.06, z);
+
+    const mat = type === 'basketball' ? materials.courtBlue : 
+                type === 'football' ? materials.courtGreen : 
+                materials.courtGreen;
+
+    // Surface
+    const surface = new THREE.Mesh(new THREE.PlaneGeometry(width, length), mat);
+    surface.rotation.x = -Math.PI / 2;
+    surface.receiveShadow = true;
+    courtGroup.add(surface);
+
+    // White borders
+    const borderGeo = new THREE.PlaneGeometry(width + 0.4, length + 0.4);
+    const border = new THREE.Mesh(borderGeo, materials.courtBorder);
+    border.rotation.x = -Math.PI / 2;
+    border.position.y = -0.01;
+    courtGroup.add(border);
+
+    // Center line
+    const line = new THREE.Mesh(new THREE.PlaneGeometry(0.2, length), materials.courtBorder);
+    line.rotation.x = -Math.PI / 2;
+    line.position.y = 0.01;
+    courtGroup.add(line);
+
+    const courtData = { id: `court_${type}`, name: `${type.charAt(0).toUpperCase() + type.slice(1)} Court`, isInteractive: true, status: 'complete', currentPhase: 8 };
+    surface.userData = courtData;
+
+    scene.add(courtGroup);
+    return courtGroup;
+  };
+
+  // Construct Sports Courts
+  createSportsCourt('basketball', 45, 25, 15, 25);
+  createSportsCourt('football', 45, -25, 20, 35);
+  createSportsCourt('tennis', -45, 25, 12, 24);
+  createSportsCourt('badminton', -45, -28, 8, 15);
 
   // Helper to create a clean, modern tower (img3 aesthetics)
   const createTower = (bldgObj, width, depth) => {
@@ -129,7 +211,7 @@ export function buildCommunity(scene) {
         wall.userData = floorData;
         floorGroup.add(wall);
       } else {
-        // Modern Window block
+        // Modern Window block with increased reflections
         const glassGeo = new THREE.BoxGeometry(width - 0.1, floorHeight - 0.15, depth - 0.1);
         const glass = new THREE.Mesh(glassGeo, materials.glass);
         glass.position.y = floorHeight/2;
@@ -243,14 +325,17 @@ export function buildCommunity(scene) {
   
   // Obstacles: {x, z, radius}
   const obstacles = [
-    {x: -24, z: -18, r: 9}, // Tower A
-    {x: 20, z: -18, r: 8}, // Tower B
-    {x: -24, z: 18, r: 9}, // Tower C
-    {x: 20, z: 18, r: 10}, // Clubhouse
-    {x: -10, z: -18, r: 8}, // Pool
-    {x: 0, z: 0, r: 5, isRoad: true, width: 10, length: 100}, // Vertical Road
-    {x: -10, z: 0, r: 5, isRoad: true, width: 100, length: 10}, // Horizontal Road 1
-    {x: 20, z: 0, r: 5, isRoad: true, width: 100, length: 10} // Horizontal Road 2
+    {x: -24, z: -18, r: 10}, // Tower A
+    {x: 20, z: -18, r: 10}, // Tower B
+    {x: -24, z: 18, r: 10}, // Tower C
+    {x: 20, z: 18, r: 12}, // Clubhouse
+    {x: -10, z: -18, r: 10}, // Pool
+    {x: 0, z: 0, r: 6, isRoad: true, width: 10, length: 110}, // Vertical Road
+    {x: 0, z: 0, r: 6, isRoad: true, width: 130, length: 10}, // Horizontal Road
+    {x: 45, z: 25, r: 18}, // Basketball
+    {x: 45, z: -25, r: 25}, // Football
+    {x: -45, z: 25, r: 18}, // Tennis
+    {x: -45, z: -28, r: 15} // Badminton
   ];
 
   const treeCount = typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150;
