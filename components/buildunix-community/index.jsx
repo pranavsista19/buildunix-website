@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { CSS2DRenderer } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { setupScene } from './scene.js';
 import { buildCommunity } from './community.js';
 import { setupRaycaster, interactiveObjects } from './raycaster.js';

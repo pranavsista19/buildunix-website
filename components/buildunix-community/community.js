@@ -1,10 +1,11 @@
 import * as THREE from 'three';
-import { CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+import { CSS2DObject } from 'three/examples/jsm/renderers/CSS2DRenderer.js';
 import { BUILDINGS } from './community.config.js';
 import { getMaterials } from './materials.js';
 import { createBuildingLabel } from './labels.js';
 
 export function buildCommunity(scene) {
+  console.log('Starting buildCommunity...');
   const materials = getMaterials();
 
   // Base Plate (Green Grass)
@@ -267,12 +268,17 @@ export function buildCommunity(scene) {
   scene.add(tennisGroup);
 
   // Sports Zone Label
-  const sportsDiv = document.createElement('div');
-  sportsDiv.className = 'community-label';
-  sportsDiv.innerHTML = `<span class="label-dot status-complete"></span><span class="label-name">Sports & Recreation</span><span class="label-phase">Phase 14/14</span>`;
-  const sportsLabel = new CSS2DObject(sportsDiv);
-  sportsLabel.position.set(sportsZoneX + 36, 6, sportsZoneZ);
-  scene.add(sportsLabel);
+  try {
+    const sportsDiv = document.createElement('div');
+    sportsDiv.className = 'community-label';
+    sportsDiv.innerHTML = `<span class="label-dot status-complete"></span><span class="label-name">Sports & Recreation</span><span class="label-phase">Phase 14/14</span>`;
+    const sportsLabel = new CSS2DObject(sportsDiv);
+    sportsLabel.position.set(sportsZoneX + 36, 6, sportsZoneZ);
+    scene.add(sportsLabel);
+    console.log('Sports label added successfully');
+  } catch (e) {
+    console.error('Failed to add sports label:', e);
+  }
 
   console.log('Sports zone added: basketball, futsal, tennis courts');
 
