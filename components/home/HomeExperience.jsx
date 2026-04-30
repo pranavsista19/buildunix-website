@@ -6,6 +6,8 @@ import styles from "@/app/home.module.css";
 import { companyEmail } from "@/lib/site-content";
 import DemoForm from "@/components/DemoForm";
 import BuildunixCommunitySection from "@/components/buildunix-community/index";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /* ── Typewriter ─────────────────────────────────────── */
 function Typewriter({ words, typeMs = 75, eraseMs = 40, holdMs = 1400 }) {
@@ -399,10 +401,67 @@ function ContactSection() {
 
 /* ── Root ───────────────────────────────────────────── */
 export default function HomeExperience() {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Fade in sections on scroll
+    const sections = document.querySelectorAll(`section[id='why'], section[id='contact'], .${styles.differSection}`);
+    sections.forEach(sec => {
+      gsap.fromTo(sec, 
+        { opacity: 0, y: 40 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sec,
+            start: "top 85%",
+          }
+        }
+      );
+    });
+
+    // Stagger highlight cards
+    gsap.fromTo(`.${styles.hlCard}`,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: `.${styles.hlGrid}`,
+          start: "top 85%",
+        }
+      }
+    );
+
+    // Stagger differentiator cards
+    gsap.fromTo(`.${styles.differCard}`,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: `.${styles.differWrap}`,
+          start: "top 80%",
+        }
+      }
+    );
+
+    return () => {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, []);
+
   return (
     <>
       <HeroSection />
-
       <HighlightsSection />
       <DifferentiatorsSection />
       <ContactSection />
