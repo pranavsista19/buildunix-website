@@ -32,7 +32,19 @@ export function setupRaycaster(container, camera, controls, scene) {
     }
   };
 
-  const onClick = () => {
+  const onClick = (e) => {
+    if (e.target.closest('.tooltip-close')) {
+      lockedObject = null;
+      if (hoveredObject) {
+        restoreOriginalMaterial(hoveredObject);
+      }
+      hoveredObject = null;
+      hideTooltip();
+      controls.autoRotate = true;
+      container.style.cursor = 'default';
+      return;
+    }
+
     if (hoveredObject) {
       if (lockedObject === hoveredObject) {
         lockedObject = null;
@@ -46,17 +58,6 @@ export function setupRaycaster(container, camera, controls, scene) {
       controls.autoRotate = true;
     }
   };
-
-  const closeBtn = document.querySelector('.tooltip-close');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation(); // Don't trigger the container click
-      lockedObject = null;
-      hoveredObject = null;
-      hideTooltip();
-      controls.autoRotate = true;
-    });
-  }
 
   container.addEventListener('mousemove', onMouseMove, { passive: true });
   container.addEventListener('click', onClick);
