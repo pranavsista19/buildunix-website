@@ -219,6 +219,8 @@ export function buildCommunity(scene) {
     const h = new THREE.Mesh(floodHeadGeo, floodHeadMat); h.position.set(x, 8, z); h.rotation.x = z > 0 ? 0.5 : -0.5; h.userData.isDecoration = true; futsalGroup.add(h);
   });
 
+  // Goals
+  const netMat = new THREE.MeshStandardMaterial({ color: 0xFFFFFF, opacity: 0.12, transparent: true, wireframe: true });
   [-20, 20].forEach(x => {
     [-1.5, 1.5].forEach(z => { const p = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 2), lineMat); p.position.set(x, 1, z); p.userData.isDecoration = true; futsalGroup.add(p); });
     const c = new THREE.Mesh(new THREE.BoxGeometry(3, 0.05, 0.05), lineMat); c.position.set(x, 2, 0); c.rotation.y = Math.PI/2; c.userData.isDecoration = true; futsalGroup.add(c);
@@ -232,6 +234,7 @@ export function buildCommunity(scene) {
 
   const woodBase = new THREE.Mesh(new THREE.PlaneGeometry(28, 14), new THREE.MeshStandardMaterial({ color: 0x8B5E3C, roughness: 0.7, metalness: 0.05 }));
   woodBase.rotation.x = -Math.PI / 2; woodBase.position.y = 0.02; woodBase.receiveShadow = true; woodBase.userData.isDecoration = true; tennisGroup.add(woodBase);
+  const grainMat = new THREE.MeshStandardMaterial({ color: 0x6B4423, opacity: 0.4, transparent: true });
   for (let z = -6; z <= 6; z += 2.4) {
     const g = new THREE.Mesh(new THREE.BoxGeometry(28, 0.005, 0.015), grainMat); g.position.set(0, 0.025, z); g.userData.isDecoration = true; tennisGroup.add(g);
   }
